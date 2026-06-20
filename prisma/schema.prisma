@@ -1,0 +1,146 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum Role {
+  BUYER
+  VENDOR
+  ADMIN
+}
+
+enum Condition {
+  NEW
+  USED
+  REFURBISHED
+}
+
+enum PaymentMethod {
+  CHAPA
+  TELEBIRR
+  CASH_ON_DELIVERY
+}
+
+enum PaymentStatus {
+  PENDING
+  PAID
+  FAILED
+}
+
+enum DeliveryStatus {
+  PENDING
+  SHIPPED
+  DELIVERED
+  CANCELLED
+}
+
+model User {
+  id           String    @id @default(uuid())
+  name         String
+  email        String    @unique
+  passwordHash String
+  role         Role      @default(BUYER)
+  profileImage String?
+  location     String?   // e.g. "Addis Ababa"
+  phone        String?   // e.g. "+251911..."
+  isVerified   Boolean   @default(false)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  // Relationships
+  products         Product[]  @relation("VendorProducts")
+  orders           Order[]    @relation("UserOrders")
+  sentMessages     Message[]  @relation("SentMessages")
+  receivedMessages Message[]  @relation("ReceivedMessages")
+  reviews          Review[]   @relation("UserReviews")
+  wishlist         Wishlist[]
+}
+
+model Product {
+  id          String    @id @default(uuid())
+  title       String
+  description String
+  price       Float     // in ETB (Ethiopian Birr)
+  condition   Condition @default(NEW)
+  category    String    // e.g., "Phones", "Laptops", "Fashion", "Vehicles", etc.
+  images      String[]  // Array of image URLs (Cloudinary)
+  stock       Int       @default(1)
+  location    String    // e.g., "Bole, Addis Ababa", "Hawassa"
+  rating      Float     @default(0.0)
+  isApproved  Boolean   @default(true) // For admin moderation, defaults true for ease
+  isFeatured  Boolean   @default(false)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  // Relationships
+  vendorId String
+  vendor   User      @relation("VendorProducts", fields: [vendorId], references: [id], onDelete: Cascade)
+  reviews  Review[]
+  messages Message[] @relation("ProductChat")
+}
+
+model Order {
+  id             String         @id @default(uuid())
+  totalAmount    Float          // in ETB
+  paymentMethod  PaymentMethod  @default(CHAPA)
+  paymentStatus  PaymentStatus  @default(PENDING)
+  deliveryStatus DeliveryStatus @default(PENDING)
+  chapaRef       String?        // Chapa transaction reference
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+
+  // Items stored as JSON: [{ productId, title, price, quantity }]
+  items          Json
+
+  // Relationships
+  buyerId String
+  buyer   User   @relation("UserOrders", fields: [buyerId], references: [id], onDelete: Cascade)
+}
+
+model Message {
+  id        String   @id @default(uuid())
+  text      String
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  // Relationships
+  senderId   String
+  sender     User    @relation("SentMessages", fields: [senderId], references: [id], onDelete: Cascade)
+  receiverId String
+  receiver   User    @relation("ReceivedMessages", fields: [receiverId], references: [id], onDelete: Cascade)
+  productId  String?
+  product    Product? @relation("ProductChat", fields: [productId], references: [id], onDelete: SetNull)
+}
+
+model Review {
+  id        String   @id @default(uuid())
+  rating    Int      // 1 to 5 stars
+  comment   String
+  createdAt DateTime @default(now())
+
+  // Relationships
+  productId  String
+  product    Product @fields: [productId], references: [id], onDelete: Cascade)
+  reviewerId String
+  reviewer   User    @relation("UserReviews", fields: [reviewerId], references: [id], onDelete: Cascade)
+
+  @@unique([productId, reviewerId])
+}
+
+model Wishlist {
+  id        String   @id @default(uuid())
+  userId    String
+  productId String
+  createdAt DateTime @default(now())
+
+  user User @fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, productId])
+}

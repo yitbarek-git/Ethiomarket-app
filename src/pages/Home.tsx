@@ -79,7 +79,7 @@ export default function Home({ products: propProducts }: HomeProps) {
             transition={{ duration: 0.7, delay: 0.2 }}
             className="text-neutral-400 text-base sm:text-lg max-w-2xl mx-auto"
           >
-            Connecting local vendors, small businesses, and buyers across Addis Ababa and beyond.
+            Connecting local vendors, small businesses, and buyers across Ethiopia.
             Enjoy safe transactions with integrated <strong>Chapa</strong> and <strong>Telebirr</strong> simulation.
           </motion.p>
 

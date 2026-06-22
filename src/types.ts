@@ -81,5 +81,7 @@ export type CategoryType =
   | "Books"
   | "Fashion"
   | "Vehicles"
+  | "Jobs"
+  | "furnitures"
   | "Real Estate"
   | "Services";

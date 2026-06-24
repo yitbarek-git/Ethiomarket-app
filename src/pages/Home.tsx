@@ -348,15 +348,15 @@ export default function Home({ products: propProducts }: HomeProps) {
             <Flame className="w-5 h-5" />
           </div>
           <h2 className="text-3xl font-sans font-bold tracking-tight text-neutral-950">
-            Empowering Ethiopia's Local Commerce From Merkato to Piassa
+            Empowering Ethiopia's Local Commerce 
           </h2>
           <p className="text-neutral-600 leading-relaxed text-sm sm:text-base">
             EthioMarket matches the physical warmth of traditional Ethiopian greeting ("እንኳን ደህና መጡ")
-            with modern high-performance technology. We verify local producers so you can find premium specialty coffee, custom Habesha garments, or electronics right from your phone.
+            with modern high-performance technology. We verify local producers so you can find premium specialty coffee, Realstate, custom garments, or electronics right from your phone.
           </p>
           <ul className="text-sm text-neutral-700 space-y-2.5 font-medium">
             <li className="flex items-center gap-2">
-              <CheckCircle2 className="w-4.5 h-4.5 text-emerald-600 shrink-0" /> Local Bole, Stadium, Hawassa, and Gonder geo-listings and delivery zones.
+              <CheckCircle2 className="w-4.5 h-4.5 text-emerald-600 shrink-0" /> Local Bole, Hawassa, and Gonder geo-listings and delivery zones.
             </li>
             <li className="flex items-center gap-2">
               <CheckCircle2 className="w-4.5 h-4.5 text-emerald-600 shrink-0" /> 100% Free registration for micro-vendors and traditional weavers.

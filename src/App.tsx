@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useMarketStore } from "./store"; // Ensure this path is correct
+import { useMarketStore } from "./store";
 import Home from "./pages/Home";
 import Marketplace from "./pages/Marketplace";
 import ProductDetails from "./pages/ProductDetails";
@@ -47,7 +47,7 @@ export default function App() {
     if (notifications.length > 0) {
       const timer = setTimeout(() => {
         clearNotifications();
-      }, 5000);
+      }, 3000);
       return () => clearTimeout(timer);
     }
   }, [notifications]);
@@ -260,7 +260,7 @@ export default function App() {
 
           <div className="border-t border-neutral-900 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px]">
             <p className="font-normal">&copy; {new Date().getFullYear()} EthioMarket Inc. All rights reserved.</p>
-            <p className="text-neutral-500">Created for EthioMarket virtual users in Addis Ababa, Bole District.</p>
+            <p className="text-neutral-500">Created for EthioMarket virtual users in Ethiopia.</p>
           </div>
         </div>
       </footer>

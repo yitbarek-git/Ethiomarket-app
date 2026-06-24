@@ -345,6 +345,7 @@ export default function CartCheckout() {
               </div>
             </div>
 
+
             {/* Check out form details */}
             <form onSubmit={handleInitiatePayment} className="space-y-4 pt-4 border-t border-neutral-50">
               {/* Shipping location address */}
@@ -381,8 +382,8 @@ export default function CartCheckout() {
                     type="button"
                     onClick={() => setSelectedMethod("TELEBIRR")}
                     className={`p-3 rounded-xl border flex items-center justify-between cursor-pointer transition-all ${selectedMethod === "TELEBIRR"
-                        ? "border-emerald-500 bg-emerald-50/40 font-bold text-emerald-900"
-                        : "border-neutral-200 hover:bg-neutral-50 text-neutral-700"
+                      ? "border-emerald-500 bg-emerald-50/40 font-bold text-emerald-900"
+                      : "border-neutral-200 hover:bg-neutral-50 text-neutral-700"
                       }`}
                   >
                     <div className="flex items-center gap-2">
@@ -396,8 +397,8 @@ export default function CartCheckout() {
                     type="button"
                     onClick={() => setSelectedMethod("CHAPA")}
                     className={`p-3 rounded-xl border flex items-center justify-between cursor-pointer transition-all ${selectedMethod === "CHAPA"
-                        ? "border-amber-500 bg-amber-50/40 font-bold text-amber-900"
-                        : "border-neutral-200 hover:bg-neutral-50 text-neutral-700"
+                      ? "border-amber-500 bg-amber-50/40 font-bold text-amber-900"
+                      : "border-neutral-200 hover:bg-neutral-50 text-neutral-700"
                       }`}
                   >
                     <div className="flex items-center gap-2">
@@ -411,8 +412,8 @@ export default function CartCheckout() {
                     type="button"
                     onClick={() => setSelectedMethod("CASH_ON_DELIVERY")}
                     className={`p-3 rounded-xl border flex items-center justify-between cursor-pointer transition-all ${selectedMethod === "CASH_ON_DELIVERY"
-                        ? "border-neutral-900 bg-neutral-55/10 font-bold text-neutral-900"
-                        : "border-neutral-200 hover:bg-neutral-50 text-neutral-700"
+                      ? "border-neutral-900 bg-neutral-55/10 font-bold text-neutral-900"
+                      : "border-neutral-200 hover:bg-neutral-50 text-neutral-700"
                       }`}
                   >
                     <div className="flex items-center gap-2">

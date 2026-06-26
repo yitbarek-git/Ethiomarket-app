@@ -88,7 +88,7 @@ const DB_PATH = path.join(process.cwd(), "db.json");
 const SEED_USERS: User[] = [
   {
     id: "user-buyer",
-    name: "Almaz Kebede",
+    name: "Sisay A",
     email: "buyer@ethio.com",
     passwordHash: "password", // Simple for developer ease
     role: "BUYER",
@@ -280,7 +280,7 @@ const SEED_REVIEWS: Review[] = [
     id: "r1",
     productId: "p1",
     reviewerId: "user-buyer",
-    reviewerName: "Almaz Kebede",
+    reviewerName: "Sisay A",
     rating: 5,
     comment: "Exceptional service from Dawit! The iPhone is absolutely brand new and original. Quick transaction using Telebirr.",
     createdAt: new Date(Date.now() - 3600000 * 24 * 2).toISOString()
@@ -289,7 +289,7 @@ const SEED_REVIEWS: Review[] = [
     id: "r2",
     productId: "p4",
     reviewerId: "user-buyer",
-    reviewerName: "Almaz Kebede",
+    reviewerName: "Yitbarek K",
     rating: 5,
     comment: "The embroidery and Hand-weaving details are gorgeous. It fits perfectly! Best Habesha Kemis I've ever purchased.",
     createdAt: new Date(Date.now() - 3600000 * 24 * 4).toISOString()
@@ -302,7 +302,7 @@ const SEED_MESSAGES: Message[] = [
     text: "Meles, is the Toyota Vitz price negotiable? Can I pay part via Chapa bank transfer?",
     senderId: "user-buyer",
     receiverId: "user-vendor-2",
-    senderName: "Almaz Kebede",
+    senderName: "Yitbarek K",
     receiverName: "Habesha Hand-Weavers",
     productId: "p6",
     productTitle: "Toyota Vitz 2012 (Yaris Hatchback)",
@@ -311,11 +311,11 @@ const SEED_MESSAGES: Message[] = [
   },
   {
     id: "m2",
-    text: "Selam Almaz! Yes, we can negotiate slightly. Bank transfer is highly preferred. When would you like to view the car in Bole?",
+    text: "Selam Yitbarek! Yes, we can negotiate slightly. Bank transfer is highly preferred. When would you like to view the car in Bole?",
     senderId: "user-vendor-2",
     receiverId: "user-buyer",
     senderName: "Habesha Hand-Weavers",
-    receiverName: "Almaz Kebede",
+    receiverName: "Sisay K",
     productId: "p6",
     productTitle: "Toyota Vitz 2012 (Yaris Hatchback)",
     isRead: false,
@@ -327,7 +327,7 @@ const SEED_ORDERS: Order[] = [
   {
     id: "order-1",
     buyerId: "user-buyer",
-    buyerName: "Almaz Kebede",
+    buyerName: "Sisay A",
     items: [
       {
         productId: "p4",

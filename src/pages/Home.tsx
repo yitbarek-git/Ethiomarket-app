@@ -39,7 +39,7 @@ export default function Home({ products: propProducts }: HomeProps) {
     { name: "Real Estate", count: "95+ listings", icon: "🏢", color: "from-teal-800 to-amber-900" },
     { name: "Cameras", count: "30+ listings", icon: "📷", color: "from-purple-800 to-indigo-900" },
 
-     /*  //Itemes coming soon.
+     /*  //Itemes coming soon...
     { name: "Books", count: "120+ listings", icon: "📱", color: "from-amber-500 to-yellow-600" },
     { name: "Laptops", count: "80+ listings", icon: "💻", color: "from-yellow-600 to-amber-700" },
     { name: "Fashion", count: "340+ listings", icon: "👗", color: "from-amber-700 to-emerald-800" },

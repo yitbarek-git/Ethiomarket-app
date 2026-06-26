@@ -167,7 +167,7 @@ export default function StaticViews({ viewType }: StaticViewsProps) {
                 <label className="text-[10px] font-bold text-neutral-400 uppercase tracking-wider font-mono">My Name</label>
                 <input
                   type="text"
-                  placeholder="e.g. Almaz Kebede"
+                  placeholder="e.g. Yitbarek K"
                   value={conName}
                   onChange={(e) => setConName(e.target.value)}
                   required
@@ -179,7 +179,7 @@ export default function StaticViews({ viewType }: StaticViewsProps) {
                 <label className="text-[10px] font-bold text-neutral-400 uppercase tracking-wider font-mono">My Email Address</label>
                 <input
                   type="email"
-                  placeholder="almaz@example.com"
+                  placeholder="example@gmail.com"
                   value={conEmail}
                   onChange={(e) => setConEmail(e.target.value)}
                   required

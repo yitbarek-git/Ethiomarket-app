@@ -25,7 +25,7 @@ export default function App() {
     setFilter,
     notifications,
     clearNotifications,
-    setActiveCategory, // NEW: Import setActiveCategory from the store
+    setActiveCategory, 
   } = useMarketStore();
 
   const [searchInput, setSearchInput] = useState("");
@@ -76,7 +76,7 @@ export default function App() {
             </div>
 
             <span className="text-xl font-bold tracking-tight text-neutral-950 font-sans group-hover:text-amber-500 transition-colors">
-              Ethio<span className="text-amber-500">Market</span>
+              MY <span className="text-amber-500">Market</span>
             </span>
           </div>
 
@@ -207,7 +207,7 @@ export default function App() {
                 Connecting vendors, micro-merchants, and consumers across Ethiopia with an advanced digital search, bargaining, and instant payment sandbox.
               </p>
               <div className="flex items-center gap-1.5 text-[9px] font-mono bg-neutral-900 w-fit p-1 px-2.5 rounded text-amber-500">
-                <Sparkles className="w-3 h-3" /> Powered by Gemini LLM
+                <Sparkles className="w-3 h-3" /> Powered by AI assistatnt
               </div>
             </div>
 

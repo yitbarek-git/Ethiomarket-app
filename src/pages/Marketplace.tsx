@@ -106,7 +106,7 @@ export default function LoginRegister() {
               <div className="relative">
                 <input
                   type="text"
-                  placeholder="e.g. Almaz Kebede"
+                  placeholder="e.g. Yitbarek K"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   required
@@ -149,7 +149,7 @@ export default function LoginRegister() {
               <div className="relative">
                 <input
                   type="tel"
-                  placeholder="+251 900 000000"
+                  placeholder="+251 9......"
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
                   required
@@ -165,7 +165,7 @@ export default function LoginRegister() {
               <div className="relative">
                 <input
                   type="text"
-                  placeholder="e.g. Bole, Addis Ababa"
+                  placeholder="e.g. Bahir Dar, Ethiopia"
                   value={location}
                   onChange={(e) => setLocation(e.target.value)}
                   className="w-full pl-9 pr-3 py-2.5 border border-neutral-200 rounded-xl text-xs outline-none focus:border-amber-500"

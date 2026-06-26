@@ -83,6 +83,18 @@
       "location": "Bole, Addis Ababa",
       "isVerified": false,
       "createdAt": "2026-06-20T14:00:42.401Z"
+    },
+    {
+      "id": "user-1782468230365",
+      "name": "Ethio-Suk",
+      "email": "yitbarekkifleyohans1@gmai.com",
+      "passwordHash": "@Yitbarek1212",
+      "role": "VENDOR",
+      "profileImage": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&auto=format&fit=crop&q=80",
+      "phone": "+2519 34 50 47 08",
+      "location": "Bahir dar, Ethiopia.",
+      "isVerified": false,
+      "createdAt": "2026-06-26T10:03:50.365Z"
     }
   ],
   "products": [
@@ -98,7 +110,7 @@
       ],
       "stock": 5,
       "location": "Bole, Addis Ababa",
-      "rating": 4.8,
+      "rating": 5,
       "isApproved": true,
       "isFeatured": true,
       "vendorId": "user-vendor-1",
@@ -174,7 +186,7 @@
       ],
       "stock": 12,
       "location": "Bole, Addis Ababa",
-      "rating": 4.7,
+      "rating": 5,
       "isApproved": true,
       "isFeatured": false,
       "vendorId": "user-vendor-1",
@@ -241,6 +253,50 @@
   ],
   "orders": [
     {
+      "id": "ethio-ord-212452",
+      "buyerId": "user-1781669911710",
+      "buyerName": "Sisay Abebew",
+      "items": [
+        {
+          "productId": "p8",
+          "title": "Organic Sidama Coffee Beans (Specialty Grade-1) - 1kg",
+          "price": 850,
+          "quantity": 1
+        }
+      ],
+      "totalAmount": 1000,
+      "paymentMethod": "TELEBIRR",
+      "paymentStatus": "PAID",
+      "deliveryStatus": "PENDING",
+      "createdAt": "2026-06-26T09:24:08.063Z",
+      "chapaRef": "TELEBIRR-AUTH-IT4CSIGGX"
+    },
+    {
+      "id": "ethio-ord-580032",
+      "buyerId": "user-1781669911710",
+      "buyerName": "Sisay Abebew",
+      "items": [
+        {
+          "productId": "p4",
+          "title": "Elegant Traditional Habesha Kemis (Traditional Dress)",
+          "price": 8500,
+          "quantity": 1
+        },
+        {
+          "productId": "p2",
+          "title": "MacBook Pro M3 Max (16-inch)",
+          "price": 155000,
+          "quantity": 1
+        }
+      ],
+      "totalAmount": 163650,
+      "paymentMethod": "TELEBIRR",
+      "paymentStatus": "PAID",
+      "deliveryStatus": "PENDING",
+      "createdAt": "2026-06-26T08:25:34.160Z",
+      "chapaRef": "TELEBIRR-AUTH-ARZ8SDWVT"
+    },
+    {
       "id": "order-1",
       "buyerId": "user-buyer",
       "buyerName": "Almaz Kebede",
@@ -303,6 +359,33 @@
       "rating": 5,
       "comment": "The embroidery and Hand-weaving details are gorgeous. It fits perfectly! Best Habesha Kemis I've ever purchased.",
       "createdAt": "2026-06-13T00:56:40.874Z"
+    },
+    {
+      "id": "rev-1782461262178",
+      "productId": "p5",
+      "reviewerId": "user-1781669911710",
+      "reviewerName": "Sisay Abebew",
+      "rating": 5,
+      "comment": "Good customer! i highly recommend him.",
+      "createdAt": "2026-06-26T08:07:42.178Z"
+    },
+    {
+      "id": "rev-1782461402671",
+      "productId": "p1",
+      "reviewerId": "user-1781669911710",
+      "reviewerName": "Sisay Abebew",
+      "rating": 5,
+      "comment": "Yabede silk new",
+      "createdAt": "2026-06-26T08:10:02.671Z"
+    },
+    {
+      "id": "rev-1782461503277",
+      "productId": "p1",
+      "reviewerId": "user-1781683269608",
+      "reviewerName": "Yitbarek Kifleyohans",
+      "rating": 5,
+      "comment": "Good service🙏🙏🙏. thanks so much.",
+      "createdAt": "2026-06-26T08:11:43.277Z"
     }
   ]
 }

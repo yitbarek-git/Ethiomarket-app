@@ -366,7 +366,7 @@ export default function CartCheckout() {
                 <label className="text-xs font-bold text-neutral-400 uppercase tracking-wider font-mono">Contact Phone Coordinate</label>
                 <input
                   type="tel"
-                  placeholder="e.g. +251 911"
+                  placeholder="e.g. +251 9"
                   value={shippingPhone}
                   onChange={(e) => setShippingPhone(e.target.value)}
                   required
@@ -437,9 +437,7 @@ export default function CartCheckout() {
       )}
 
 
-      {/* =======================================================
-          GATEWAY MODAL SIMULATION: TELEBIRR
-          ======================================================= */}
+      {/*GATEWAY MODAL SIMULATION: TELEBIRR*/}
       <AnimatePresence>
         {telebirrModalOpen && (
           <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
@@ -511,9 +509,7 @@ export default function CartCheckout() {
       </AnimatePresence>
 
 
-      {/* =======================================================
-          GATEWAY MODAL SIMULATION: CHAPA
-          ======================================================= */}
+      {/* GATEWAY MODAL SIMULATION: CHAPA */}
       <AnimatePresence>
         {chapaModalOpen && (
           <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">

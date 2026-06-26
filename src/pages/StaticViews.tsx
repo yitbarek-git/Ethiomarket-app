@@ -50,8 +50,9 @@ export default function StaticViews({ viewType }: StaticViewsProps) {
           </div>
           <div className="rounded-2xl overflow-hidden shadow-lg aspect-video h-64 border border-amber-100/50">
             <img
-              src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=600&auto=format&fit=crop&q=80"
-              alt="Artisans trade"
+              src="/assets/Ethiomarketlogo.png"
+              alt="Ethio Market logo"
+
               className="w-full h-full object-cover"
               referrerPolicy="no-referrer"
             />

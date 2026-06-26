@@ -37,7 +37,16 @@ export default function Home({ products: propProducts }: HomeProps) {
     { name: "Fashion", count: "340+ listings", icon: "👗", color: "from-amber-700 to-emerald-800" },
     { name: "Vehicles", count: "45+ listings", icon: "🚗", color: "from-emerald-800 to-teal-800" },
     { name: "Real Estate", count: "95+ listings", icon: "🏢", color: "from-teal-800 to-amber-900" },
+    { name: "Cameras", count: "30+ listings", icon: "📷", color: "from-purple-800 to-indigo-900" },
+
+     /*  //Itemes coming soon.
+    { name: "Books", count: "120+ listings", icon: "📱", color: "from-amber-500 to-yellow-600" },
+    { name: "Laptops", count: "80+ listings", icon: "💻", color: "from-yellow-600 to-amber-700" },
+    { name: "Fashion", count: "340+ listings", icon: "👗", color: "from-amber-700 to-emerald-800" },
+    { name: "Vehicles", count: "45+ listings", icon: "🚗", color: "from-emerald-800 to-teal-800" },
+    { name: "Real Estate", count: "95+ listings", icon: "🏢", color: "from-teal-800 to-amber-900" },
     { name: "Cameras", count: "30+ listings", icon: "📷", color: "from-purple-800 to-indigo-900" }
+ */
   ];
 
   return (
@@ -368,8 +377,8 @@ export default function Home({ products: propProducts }: HomeProps) {
         </div>
         <div className="flex-1 w-full max-w-md shrink-0">
           <img
-            src="https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=600&auto=format&fit=crop&q=80"
-            alt="Ethiopian Coffee bean trade"
+            src="/assets/Ethiomarketlogo.png"
+            alt="Ethio Market logo"
             className="w-full aspect-4/3 object-cover rounded-2xl shadow-xl border border-amber-200"
             referrerPolicy="no-referrer"
           />

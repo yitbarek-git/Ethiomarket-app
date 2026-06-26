@@ -180,7 +180,7 @@ const SEED_PRODUCTS: Product[] = [
     category: "Cameras",
     images: ["https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=600&auto=format&fit=crop&q=80"],
     stock: 2,
-    location: "Bole, Addis Ababa",
+    location: "Bahir Dar, Ethiopia",
     rating: 4.5,
     isApproved: true,
     isFeatured: false,

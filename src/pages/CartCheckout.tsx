@@ -22,7 +22,7 @@ export default function CartCheckout() {
 
   // Local state
   const [shippingAddress, setShippingAddress] = useState("");
-  const [shippingPhone, setShippingPhone] = useState(user?.phone || "+251911");
+  const [shippingPhone, setShippingPhone] = useState(user?.phone || "+2519");
   const [selectedMethod, setSelectedMethod] = useState<"CASH_ON_DELIVERY" | "TELEBIRR" | "CHAPA">("TELEBIRR");
 
   // Gateway Modals
@@ -31,7 +31,7 @@ export default function CartCheckout() {
   const [orderSuccessId, setOrderSuccessId] = useState<string | null>(null);
 
   // Telebirr simulation portal inputs
-  const [telebirrPhone, setTelebirrPhone] = useState(user?.phone || "+251911");
+  const [telebirrPhone, setTelebirrPhone] = useState(user?.phone || "+2519");
   const [telebirrOtp, setTelebirrOtp] = useState("");
   const [telebirrLoading, setTelebirrLoading] = useState(false);
 

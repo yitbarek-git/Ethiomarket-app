@@ -129,7 +129,7 @@
       ],
       "stock": 1,
       "location": "Megenagna, Addis Ababa",
-      "rating": 4.9,
+      "rating": 5,
       "isApproved": true,
       "isFeatured": true,
       "vendorId": "user-vendor-1",
@@ -253,6 +253,37 @@
   ],
   "orders": [
     {
+      "id": "ethio-ord-820615",
+      "buyerId": "user-1781669911710",
+      "buyerName": "Sisay Abebew",
+      "items": [
+        {
+          "productId": "p1",
+          "title": "iPhone 15 Pro Max - 256GB",
+          "price": 92000,
+          "quantity": 2
+        },
+        {
+          "productId": "p4",
+          "title": "Elegant Traditional Habesha Kemis (Traditional Dress)",
+          "price": 8500,
+          "quantity": 6
+        },
+        {
+          "productId": "p6",
+          "title": "Toyota Vitz 2012 (Yaris Hatchback)",
+          "price": 1350000,
+          "quantity": 7
+        }
+      ],
+      "totalAmount": 9685150,
+      "paymentMethod": "CHAPA",
+      "paymentStatus": "PAID",
+      "deliveryStatus": "PENDING",
+      "createdAt": "2026-06-28T11:39:05.450Z",
+      "chapaRef": "CHAPA-TX-ethio-ord-820615-1782646745"
+    },
+    {
       "id": "ethio-ord-212452",
       "buyerId": "user-1781669911710",
       "buyerName": "Sisay Abebew",
@@ -370,13 +401,13 @@
       "createdAt": "2026-06-26T08:07:42.178Z"
     },
     {
-      "id": "rev-1782461402671",
+      "id": "rev-1782647308150",
       "productId": "p1",
       "reviewerId": "user-1781669911710",
       "reviewerName": "Sisay Abebew",
       "rating": 5,
-      "comment": "Yabede silk new",
-      "createdAt": "2026-06-26T08:10:02.671Z"
+      "comment": "Nice trade!\n",
+      "createdAt": "2026-06-28T11:48:28.150Z"
     },
     {
       "id": "rev-1782461503277",
@@ -386,6 +417,15 @@
       "rating": 5,
       "comment": "Good service🙏🙏🙏. thanks so much.",
       "createdAt": "2026-06-26T08:11:43.277Z"
+    },
+    {
+      "id": "rev-1782647066265",
+      "productId": "p2",
+      "reviewerId": "user-1781669911710",
+      "reviewerName": "Sisay Abebew",
+      "rating": 5,
+      "comment": "Good!\n",
+      "createdAt": "2026-06-28T11:44:26.265Z"
     }
   ]
 }

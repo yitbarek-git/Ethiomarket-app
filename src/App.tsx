@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useMarketStore } from "./store";
+import CartCheckout from "./pages/CartCheckout";
+import Dashboard from "./pages/Dashboard";
 import Home from "./pages/Home";
+import LoginRegister from "./pages/LoginRegister";
 import Marketplace from "./pages/Marketplace";
 import ProductDetails from "./pages/ProductDetails";
-import Dashboard from "./pages/Dashboard";
-import CartCheckout from "./pages/CartCheckout";
-import LoginRegister from "./pages/LoginRegister";
 import StaticViews from "./pages/StaticViews";
 import {
   ShoppingBag, Search, Sparkles, User, LogOut,
@@ -25,7 +25,7 @@ export default function App() {
     setFilter,
     notifications,
     clearNotifications,
-    setActiveCategory, 
+    setActiveCategory,
   } = useMarketStore();
 
   const [searchInput, setSearchInput] = useState("");
@@ -253,7 +253,7 @@ export default function App() {
               <div className="flex gap-2 pt-1 font-mono text-[9px] font-bold text-neutral-350">
                 <span className="p-1 px-2 bg-neutral-900 border border-neutral-800 rounded uppercase">Chapa</span>
                 <span className="p-1 px-2 bg-neutral-900 border border-neutral-800 rounded uppercase text-emerald-500">Telebirr</span>
-                <span className="p-1 px-2 bg-neutral-900 border border-neutral-800 rounded uppercase">COD</span>
+                <span className="p-1 px-2 bg-neutral-900 border border-neutral-800 rounded uppercase">CBE</span>
               </div>
             </div>
           </div>

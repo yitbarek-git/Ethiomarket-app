@@ -1,17 +1,19 @@
 import React, { useState } from "react";
-// motion removed – it was not used
+import { motion } from "motion/react";
 import { Mail, ShieldCheck, Lock, User, Sparkles, MapPin, Phone, UserCheck, Building2 } from "lucide-react";
 import { useMarketStore } from "../store";
+import { useTranslation } from "../translations";
 
 export default function LoginRegister() {
-  const { setUser, addNotification, setCurrentPage } = useMarketStore();
+  const { setUser, addNotification, setCurrentPage, language } = useMarketStore();
+  const { t } = useTranslation(language);
   const [activeMode, setActiveMode] = useState<"login" | "register">("login");
 
   // Form states
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
-  const [phone, setPhone] = useState("+251"); // ← removed trailing space
+  const [phone, setPhone] = useState("+251 ");
   const [location, setLocation] = useState("Bole, Addis Ababa");
   const [role, setRole] = useState<"BUYER" | "VENDOR">("BUYER");
   const [errorMsg, setErrorMsg] = useState("");
@@ -23,7 +25,7 @@ export default function LoginRegister() {
     setLoading(true);
 
     const apiPath = activeMode === "login" ? "/api/auth/login" : "/api/auth/register";
-    const bodyPayload = activeMode === "login"
+    const bodyPayload = activeMode === "login" 
       ? { email, password }
       : { name, email, password, phone, location, role };
 
@@ -38,32 +40,34 @@ export default function LoginRegister() {
       if (data.success) {
         setUser(data.data.user, data.data.token);
         addNotification(
-          activeMode === "login"
+          activeMode === "login" 
             ? `Welcome back to EthioMarket, ${data.data.user.name}!`
             : "Registration complete! Welcome to the marketplace."
         );
+        
+        // Redirect
         setCurrentPage("home");
       } else {
         setErrorMsg(data.error || "Authentication failed. Please verify credentials.");
       }
     } catch (err: any) {
       console.error(err);
-      setErrorMsg("Failed to communicate with Auth controllers on the server.");
+      setErrorMsg("Unable to connect to the server. Please try again.");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="max-w-md mx-auto bg-white border border-neutral-200 rounded-3xl overflow-hidden shadow-xl p-6 sm:p-8 space-y-6">
+    <div className="max-w-md mx-auto bg-white border border-neutral-200 rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl p-4 sm:p-8 space-y-5 sm:space-y-6">
       {/* Branding Header */}
       <div className="text-center space-y-2">
         <div className="inline-flex py-1 px-3 bg-amber-500/10 border border-amber-500/20 rounded-full text-amber-500 text-[10px] font-mono font-bold uppercase tracking-wider items-center gap-1.5 mx-auto">
           <Sparkles className="w-3.5 h-3.5" />
-          ethiopian virtual traditional market
+          Ethiopian Marketplace
         </div>
-        <h2 className="text-2xl font-bold text-neutral-900 tracking-tight leading-none">EthioMarket Connect</h2>
-        <p className="text-xs text-neutral-500">Join Addis Ababa's largest online barter community</p>
+        <h2 className="text-2xl font-bold text-neutral-900 tracking-tight leading-none">Welcome to EthioMarket</h2>
+        <p className="text-xs text-neutral-500">Buy and sell with verified local sellers across Ethiopia</p>
       </div>
 
       {/* Tabs */}
@@ -73,20 +77,22 @@ export default function LoginRegister() {
             setActiveMode("login");
             setErrorMsg("");
           }}
-          className={`py-2 text-xs font-bold rounded-lg cursor-pointer transition-all ${activeMode === "login" ? "bg-white text-neutral-900 shadow-sm" : "text-neutral-500 hover:text-neutral-800"
-            }`}
+          className={`py-2 text-xs font-bold rounded-lg cursor-pointer transition-all ${
+            activeMode === "login" ? "bg-white text-neutral-900 shadow-sm" : "text-neutral-500 hover:text-neutral-800"
+          }`}
         >
-          Sign In
+          {t("login")}
         </button>
         <button
           onClick={() => {
             setActiveMode("register");
             setErrorMsg("");
           }}
-          className={`py-2 text-xs font-bold rounded-lg cursor-pointer transition-all ${activeMode === "register" ? "bg-white text-neutral-900 shadow-sm" : "text-neutral-500 hover:text-neutral-800"
-            }`}
+          className={`py-2 text-xs font-bold rounded-lg cursor-pointer transition-all ${
+            activeMode === "register" ? "bg-white text-neutral-900 shadow-sm" : "text-neutral-500 hover:text-neutral-800"
+          }`}
         >
-          Register
+          {t("register")}
         </button>
       </div>
 
@@ -103,15 +109,15 @@ export default function LoginRegister() {
           <>
             {/* Name */}
             <div className="space-y-1">
-              <label className="text-[10px] font-bold text-neutral-500 uppercase tracking-wider font-mono">Full Name</label>
+              <label className="text-[10px] font-bold text-neutral-450 uppercase tracking-wider font-mono">Full Name</label>
               <div className="relative">
                 <input
                   type="text"
-                  placeholder="e.g. Yitbarek K"
+                  placeholder="e.g. Almaz Kebede"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   required
-                  className="w-full pl-9 pr-3 py-2.5 border border-neutral-200 rounded-xl text-xs outline-none focus:border-amber-500"
+                  className="w-full pl-9 pr-3 py-2.5 border border-neutral-250 rounded-xl text-xs outline-none focus:border-amber-500"
                 />
                 <User className="absolute left-3 top-3 text-neutral-400 w-4 h-4" />
               </div>
@@ -119,25 +125,27 @@ export default function LoginRegister() {
 
             {/* Role selecting toggle */}
             <div className="space-y-1">
-              <label className="text-[10px] font-bold text-neutral-500 uppercase tracking-wider font-mono">Select Account Type</label>
+              <label className="text-[10px] font-bold text-neutral-450 uppercase tracking-wider font-mono">Select Account Type</label>
               <div className="grid grid-cols-2 gap-2">
                 <button
                   type="button"
                   onClick={() => setRole("BUYER")}
-                  className={`py-2 rounded-xl text-[10px] font-mono font-bold cursor-pointer border flex items-center justify-center gap-1 transition-all ${role === "BUYER"
-                      ? "bg-neutral-950 border-neutral-950 text-white"
+                  className={`py-2 rounded-xl text-[10px] font-mono font-bold cursor-pointer border flex items-center justify-center gap-1 transition-all ${
+                    role === "BUYER" 
+                      ? "bg-neutral-950 border-neutral-950 text-white" 
                       : "bg-white border-neutral-200 text-neutral-600 hover:bg-neutral-50"
-                    }`}
+                  }`}
                 >
                   <UserCheck className="w-3.5 h-3.5" /> Buyer Account
                 </button>
                 <button
                   type="button"
                   onClick={() => setRole("VENDOR")}
-                  className={`py-2 rounded-xl text-[10px] font-mono font-bold cursor-pointer border flex items-center justify-center gap-1 transition-all ${role === "VENDOR"
-                      ? "bg-neutral-950 border-neutral-950 text-white"
+                  className={`py-2 rounded-xl text-[10px] font-mono font-bold cursor-pointer border flex items-center justify-center gap-1 transition-all ${
+                    role === "VENDOR" 
+                      ? "bg-neutral-950 border-neutral-950 text-white" 
                       : "bg-white border-neutral-200 text-neutral-600 hover:bg-neutral-50"
-                    }`}
+                  }`}
                 >
                   <Building2 className="w-3.5 h-3.5" /> Retail Vendor
                 </button>
@@ -146,15 +154,15 @@ export default function LoginRegister() {
 
             {/* Phone */}
             <div className="space-y-1">
-              <label className="text-[10px] font-bold text-neutral-500 uppercase tracking-wider font-mono">Mobile Phone (verification)</label>
+              <label className="text-[10px] font-bold text-neutral-450 uppercase tracking-wider font-mono">Mobile Mobile Phone (verification)</label>
               <div className="relative">
                 <input
                   type="tel"
-                  placeholder="+251 9......"
+                  placeholder="+251 900 000000"
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
                   required
-                  className="w-full pl-9 pr-3 py-2.5 border border-neutral-200 rounded-xl text-xs outline-none focus:border-amber-500"
+                  className="w-full pl-9 pr-3 py-2.5 border border-neutral-250 rounded-xl text-xs outline-none focus:border-amber-500"
                 />
                 <Phone className="absolute left-3 top-3 text-neutral-400 w-4 h-4" />
               </div>
@@ -162,14 +170,14 @@ export default function LoginRegister() {
 
             {/* Geographical Location */}
             <div className="space-y-1">
-              <label className="text-[10px] font-bold text-neutral-500 uppercase tracking-wider font-mono">Location city</label>
+              <label className="text-[10px] font-bold text-neutral-450 uppercase tracking-wider font-mono">Location city</label>
               <div className="relative">
                 <input
                   type="text"
                   placeholder="e.g. Bole, Addis Ababa"
                   value={location}
                   onChange={(e) => setLocation(e.target.value)}
-                  className="w-full pl-9 pr-3 py-2.5 border border-neutral-200 rounded-xl text-xs outline-none focus:border-amber-500"
+                  className="w-full pl-9 pr-3 py-2.5 border border-neutral-250 rounded-xl text-xs outline-none focus:border-amber-500"
                 />
                 <MapPin className="absolute left-3 top-3 text-neutral-400 w-4 h-4" />
               </div>
@@ -179,15 +187,15 @@ export default function LoginRegister() {
 
         {/* Email */}
         <div className="space-y-1">
-          <label className="text-[10px] font-bold text-neutral-500 uppercase tracking-wider font-mono block">E-Mail Address</label>
+          <label className="text-[10px] font-bold text-neutral-450 uppercase tracking-wider font-mono block">E-Mail Address</label>
           <div className="relative">
             <input
               type="email"
-              placeholder="example@gmail.com"
+              placeholder="buyer@ethio.com (or vendor@ethio.com)"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="w-full pl-9 pr-3 py-2.5 border border-neutral-200 rounded-xl text-xs outline-none focus:border-amber-500 bg-white"
+              className="w-full pl-9 pr-3 py-2.5 border border-neutral-250 rounded-xl text-xs outline-none focus:border-amber-500 bg-white"
             />
             <Mail className="absolute left-3 top-3 text-neutral-400 w-4 h-4" />
           </div>
@@ -195,7 +203,7 @@ export default function LoginRegister() {
 
         {/* Password */}
         <div className="space-y-1">
-          <label className="text-[10px] font-bold text-neutral-500 uppercase tracking-wider font-mono block">Password Key</label>
+          <label className="text-[10px] font-bold text-neutral-450 uppercase tracking-wider font-mono block">Password Key</label>
           <div className="relative">
             <input
               type="password"
@@ -203,7 +211,7 @@ export default function LoginRegister() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              className="w-full pl-9 pr-3 py-2.5 border border-neutral-200 rounded-xl text-xs outline-none focus:border-amber-500 bg-white"
+              className="w-full pl-9 pr-3 py-2.5 border border-neutral-250 rounded-xl text-xs outline-none focus:border-amber-500 bg-white"
             />
             <Lock className="absolute left-3 top-3 text-neutral-400 w-4 h-4" />
           </div>
@@ -215,11 +223,11 @@ export default function LoginRegister() {
           disabled={loading}
           className="w-full py-3 bg-neutral-950 hover:bg-neutral-800 text-white font-semibold rounded-xl text-xs cursor-pointer shadow-md disabled:opacity-50 transition-colors"
         >
-          {loading
-            ? "Authorizing account state..."
-            : activeMode === "login"
-              ? "Complete Sign In"
-              : "Register New Account"
+          {loading 
+            ? "Authorizing..." 
+            : activeMode === "login" 
+              ? t("login") 
+              : t("register")
           }
         </button>
       </form>
@@ -227,9 +235,9 @@ export default function LoginRegister() {
       {/* Developer Sandbox Hints */}
       <div className="p-3 bg-amber-50 rounded-xl border border-amber-100 text-[10px] leading-relaxed text-neutral-700 font-serif">
         <strong>Demo Sandbox Profiles (Seed data):</strong> <br />
-        • Buyer : <code className="font-mono bg-white px-1">buyer@gmail.com</code> + code <code className="font-mono bg-white px-1">password</code> <br />
-        • Vendor : <code className="font-mono bg-white px-1">vendor@ethio.com</code> + code <code className="font-mono bg-white px-1">password</code> <br />
-        • Admin : <code className="font-mono bg-white px-1">admin@gmail.com</code> + code <code className="font-mono bg-white px-1">password</code>
+        • Buyer Row: <code className="font-mono bg-white px-1">buyer@ethio.com</code> + code <code className="font-mono bg-white px-1">password</code> <br />
+        • Vendor Row: <code className="font-mono bg-white px-1">vendor@ethio.com</code> + code <code className="font-mono bg-white px-1">password</code> <br />
+        • Admin Row: <code className="font-mono bg-white px-1">admin@ethio.com</code> + code <code className="font-mono bg-white px-1">password</code>
       </div>
     </div>
   );

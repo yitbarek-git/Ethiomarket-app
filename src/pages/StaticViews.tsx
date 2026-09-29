@@ -29,30 +29,29 @@ export default function StaticViews({ viewType }: StaticViewsProps) {
         {/* Story Intro */}
         <section className="text-center space-y-4">
           <div className="inline-flex py-1 px-3 bg-amber-500/10 border border-amber-500/20 rounded-full text-amber-500 text-[10px] font-mono font-bold uppercase tracking-wider items-center gap-1.5 mx-auto">
-            <Sparkles className="w-3.5 h-3.5" /> Our Vision
+            <Sparkles className="w-3.5 h-3.5" /> Our Mission
           </div>
           <h1 className="text-4xl font-bold tracking-tight text-neutral-900 leading-none">About EthioMarket</h1>
           <p className="text-neutral-500 text-sm max-w-2xl mx-auto leading-relaxed">
-            Bridging Ethiopia's rich trading legacy with high-performance electronic portals. We empower local micro-merchants, individual sellers, and verified artisans.
+            Connecting buyers and sellers across Ethiopia. We make it easy to find quality goods, negotiate prices directly, and pay safely using Telebirr, Chapa, or cash on delivery.
           </p>
         </section>
 
         {/* Narrative columns */}
         <section className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
           <div className="space-y-4 text-left">
-            <h2 className="text-2xl font-bold tracking-tight text-neutral-900">Modernizing Local Commerce</h2>
+            <h2 className="text-2xl font-bold tracking-tight text-neutral-900">Built for Ethiopian Trade</h2>
             <p className="text-neutral-600 text-xs sm:text-sm leading-relaxed font-normal">
-              For generations, traditional marketplaces like Addis Ababa's Merkato have modeled the energetic core of Ethiopian trade. EthioMarket replicates this vibrant bargaining experience online, supporting digital assets uploads, buyer-seller chat negotiations, and local geographic listings.
+              For generations, marketplaces like Merkato and Shiro Meda have brought people together to trade, bargain, and connect. EthioMarket brings this everyday experience online.
             </p>
             <p className="text-neutral-600 text-xs sm:text-sm leading-relaxed font-normal">
-              Our mission is to establish a safe, zero-friction e-commerce marketplace where anyone, from traditional weavers in Shiro Meda to electronics importers in Bole, can open a storefront and interact instantly with purchasers across all 12 regions of Ethiopia.
+              Whether you are looking for electronics in Bole, traditional handwoven dresses in Shiro Meda, or fresh specialty coffee from Sidama, our marketplace makes browsing and direct messaging simple for everyone.
             </p>
           </div>
           <div className="rounded-2xl overflow-hidden shadow-lg aspect-video h-64 border border-amber-100/50">
-            <img
-              src="/assets/Ethiomarketlogo.png"
-              alt="Ethio Market logo"
-
+            <img 
+              src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=600&auto=format&fit=crop&q=80" 
+              alt="Artisans trade" 
               className="w-full h-full object-cover"
               referrerPolicy="no-referrer"
             />
@@ -61,22 +60,22 @@ export default function StaticViews({ viewType }: StaticViewsProps) {
 
         {/* Core Pillars */}
         <section className="bg-neutral-50 rounded-2xl p-8 border border-neutral-100 text-left space-y-6">
-          <h3 className="font-sans font-bold text-neutral-900 text-lg border-b border-neutral-100 pb-3">Our Three Pillars for Ethiopian Commerce</h3>
+          <h3 className="font-sans font-bold text-neutral-900 text-lg border-b border-neutral-100 pb-3">How EthioMarket Works</h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs text-neutral-600">
             <div className="space-y-2">
               <span className="text-amber-500 text-xl font-bold font-mono">01.</span>
-              <h4 className="font-bold text-neutral-850 text-sm">Empowering Local Vendors</h4>
-              <p className="leading-relaxed font-normal">We reject processing fees for starter portfolios, letting traditional knitters and students catalog listings completely free.</p>
+              <h4 className="font-bold text-neutral-850 text-sm">Free for Local Sellers</h4>
+              <p className="leading-relaxed font-normal">Individual sellers, students, and artisans can list their items easily without upfront fees.</p>
             </div>
             <div className="space-y-2">
               <span className="text-amber-500 text-xl font-bold font-mono">02.</span>
-              <h4 className="font-bold text-neutral-850 text-sm">Safe Regional Trading</h4>
-              <p className="leading-relaxed font-normal">We implement secure phone validations, manual store vetting, and in-built caution warnings so you can buy and sell safely.</p>
+              <h4 className="font-bold text-neutral-850 text-sm">Direct Bargaining & Chat</h4>
+              <p className="leading-relaxed font-normal">Message sellers directly to ask about conditions, negotiate fair prices, and arrange safe public meetups.</p>
             </div>
             <div className="space-y-2">
               <span className="text-amber-500 text-xl font-bold font-mono">03.</span>
-              <h4 className="font-bold text-neutral-850 text-sm">Native Payment Flows</h4>
-              <p className="leading-relaxed font-normal">By partnering and supporting high-fidelity simulations for Chapa and Telebirr, we match current consumer patterns across Addis Ababa.</p>
+              <h4 className="font-bold text-neutral-850 text-sm">Local Payment Options</h4>
+              <p className="leading-relaxed font-normal">Pay using Telebirr mobile money, Chapa debit cards and CBE Birr, or cash on delivery.</p>
             </div>
           </div>
         </section>
@@ -88,24 +87,24 @@ export default function StaticViews({ viewType }: StaticViewsProps) {
   return (
     <div className="space-y-12 max-w-4xl mx-auto py-4">
       <section className="text-center space-y-4">
-        <h1 className="text-4xl font-bold tracking-tight text-neutral-900">Contact EthioMarket</h1>
+        <h1 className="text-4xl font-bold tracking-tight text-neutral-900">Contact Us</h1>
         <p className="text-neutral-500 text-sm max-w-xl mx-auto leading-relaxed">
-          Need help registering your Bole store, clearing Chapa bills, or flagging listings? Our support desk responds in under an hour.
+          Have questions about buying, selling, or payments on EthioMarket? Get in touch with our team in Addis Ababa.
         </p>
       </section>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
         {/* Left Column Contact info */}
         <div className="space-y-6 text-left">
-          <h2 className="text-xl font-bold text-neutral-950">Reach Out Coordinates</h2>
-
+          <h2 className="text-xl font-bold text-neutral-950">Contact Information</h2>
+          
           <div className="space-y-4 font-mono text-xs text-neutral-600 font-medium">
             <div className="flex items-center gap-3">
               <div className="p-2 bg-amber-50 text-amber-600 rounded-lg shrink-0">
                 <Mail className="w-4 h-4" />
               </div>
               <div>
-                <span className="block text-[9px] text-neutral-400 font-bold uppercase tracking-wider">Email Inquiry</span>
+                <span className="block text-[9px] text-neutral-400 font-bold uppercase tracking-wider">Email</span>
                 <span className="text-neutral-800">support@ethiomarket.com</span>
               </div>
             </div>
@@ -115,7 +114,7 @@ export default function StaticViews({ viewType }: StaticViewsProps) {
                 <Phone className="w-4 h-4" />
               </div>
               <div>
-                <span className="block text-[9px] text-neutral-400 font-bold uppercase tracking-wider">Call Core Support</span>
+                <span className="block text-[9px] text-neutral-400 font-bold uppercase tracking-wider">Phone</span>
                 <span className="text-neutral-800">+251 911 000000</span>
               </div>
             </div>
@@ -125,8 +124,8 @@ export default function StaticViews({ viewType }: StaticViewsProps) {
                 <MapPin className="w-4 h-4" />
               </div>
               <div>
-                <span className="block text-[9px] text-neutral-400 font-bold uppercase tracking-wider">Addis Command Office</span>
-                <span className="text-neutral-800">Woreda 03, Bole, Addis Ababa, Ethiopia</span>
+                <span className="block text-[9px] text-neutral-400 font-bold uppercase tracking-wider">Office</span>
+                <span className="text-neutral-800">Bole, Addis Ababa, Ethiopia</span>
               </div>
             </div>
           </div>
@@ -167,7 +166,7 @@ export default function StaticViews({ viewType }: StaticViewsProps) {
                 <label className="text-[10px] font-bold text-neutral-400 uppercase tracking-wider font-mono">My Name</label>
                 <input
                   type="text"
-                  placeholder="e.g. Yitbarek K"
+                  placeholder="e.g. Almaz Kebede"
                   value={conName}
                   onChange={(e) => setConName(e.target.value)}
                   required
@@ -179,7 +178,7 @@ export default function StaticViews({ viewType }: StaticViewsProps) {
                 <label className="text-[10px] font-bold text-neutral-400 uppercase tracking-wider font-mono">My Email Address</label>
                 <input
                   type="email"
-                  placeholder="example@gmail.com"
+                  placeholder="almaz@example.com"
                   value={conEmail}
                   onChange={(e) => setConEmail(e.target.value)}
                   required

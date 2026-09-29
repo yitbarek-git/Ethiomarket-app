@@ -70,7 +70,7 @@ export interface Review {
   createdAt: string;
 }
 
-export type CategoryType =
+export type CategoryType = 
   | "All"
   | "Phones"
   | "Laptops"
@@ -81,7 +81,15 @@ export type CategoryType =
   | "Books"
   | "Fashion"
   | "Vehicles"
-  | "Jobs"
-  | "furnitures"
   | "Real Estate"
   | "Services";
+
+export type LanguageCode = "en" | "am" | "om" | "ti" | "so";
+
+export interface LanguageOption {
+  code: LanguageCode;
+  name: string;
+  nativeName: string;
+  flag: string;
+  region: string;
+}

@@ -1,5 +1,6 @@
 import fs from "fs";
 import path from "path";
+import { SEED_USERS, SEED_PRODUCTS, SEED_REVIEWS, SEED_MESSAGES, SEED_ORDERS } from "./seedData";
 
 export interface User {
   id: string;
@@ -85,265 +86,6 @@ export interface DbSchema {
 
 const DB_PATH = path.join(process.cwd(), "db.json");
 
-const SEED_USERS: User[] = [
-  {
-    id: "user-buyer",
-    name: "Sisay A",
-    email: "buyer@ethio.com",
-    passwordHash: "password", // Simple for developer ease
-    role: "BUYER",
-    profileImage: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80",
-    location: "Megenagna, Addis Ababa",
-    phone: "+251911445566",
-    isVerified: true,
-    createdAt: new Date().toISOString()
-  },
-  {
-    id: "user-vendor-1",
-    name: "Bole Electronic Store (Dawit)",
-    email: "vendor@ethio.com",
-    passwordHash: "password",
-    role: "VENDOR",
-    profileImage: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80",
-    location: "Bole, Addis Ababa",
-    phone: "+251912556677",
-    isVerified: true,
-    createdAt: new Date().toISOString()
-  },
-  {
-    id: "user-vendor-2",
-    name: "Habesha Hand-Weavers",
-    email: "weaver@ethio.com",
-    passwordHash: "password",
-    role: "VENDOR",
-    profileImage: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&auto=format&fit=crop&q=80",
-    location: "Shiro Meda, Addis Ababa",
-    phone: "+251913667788",
-    isVerified: true,
-    createdAt: new Date().toISOString()
-  },
-  {
-    id: "user-admin",
-    name: "EthioMarket Admin (Selam)",
-    email: "admin@ethio.com",
-    passwordHash: "password",
-    role: "ADMIN",
-    profileImage: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&auto=format&fit=crop&q=80",
-    location: "Piassa, Addis Ababa",
-    phone: "+251911000000",
-    isVerified: true,
-    createdAt: new Date().toISOString()
-  }
-];
-
-const SEED_PRODUCTS: Product[] = [
-  {
-    id: "p1",
-    title: "iPhone 15 Pro Max - 256GB",
-    description: "Brand new original iPhone 15 Pro Max, titanium grey, physical dual SIM. Store warranty included.",
-    price: 92000,
-    condition: "NEW",
-    category: "Phones",
-    images: ["https://images.unsplash.com/photo-1695048133142-1a20484d2569?w=600&auto=format&fit=crop&q=80"],
-    stock: 5,
-    location: "Bole, Addis Ababa",
-    rating: 4.8,
-    isApproved: true,
-    isFeatured: true,
-    vendorId: "user-vendor-1",
-    vendorName: "Bole Electronic Store (Dawit)",
-    createdAt: new Date(Date.now() - 3600000 * 24 * 3).toISOString() // 3 days ago
-  },
-  {
-    id: "p2",
-    title: "MacBook Pro M3 Max (16-inch)",
-    description: "Apple M3 Max Chip, 36GB Unified Memory, 1TB SSD. Space Black. Barely utilized, pristine shape. Comes with original charger and box.",
-    price: 155000,
-    condition: "USED",
-    category: "Laptops",
-    images: ["https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=600&auto=format&fit=crop&q=80"],
-    stock: 1,
-    location: "Megenagna, Addis Ababa",
-    rating: 4.9,
-    isApproved: true,
-    isFeatured: true,
-    vendorId: "user-vendor-1",
-    vendorName: "Bole Electronic Store (Dawit)",
-    createdAt: new Date(Date.now() - 3600000 * 24 * 1).toISOString() // 1 day ago
-  },
-  {
-    id: "p3",
-    title: "Canon EOS R6 Mark II Mirrorless Camera",
-    description: "Excellent mirrorless hybrid camera. 24.2 MP, up to 40fps electronic shutter, body-only configuration. Ideal for photography geeks in Addis.",
-    price: 178000,
-    condition: "NEW",
-    category: "Cameras",
-    images: ["https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=600&auto=format&fit=crop&q=80"],
-    stock: 2,
-    location: "Bahir Dar, Ethiopia",
-    rating: 4.5,
-    isApproved: true,
-    isFeatured: false,
-    vendorId: "user-vendor-1",
-    vendorName: "Bole Electronic Store (Dawit)",
-    createdAt: new Date(Date.now() - 3600000 * 12).toISOString() // 12 hours ago
-  },
-  {
-    id: "p4",
-    title: "Elegant Traditional Habesha Kemis (Traditional Dress)",
-    description: "Stunning hand-woven cotton traditional dress adorned with classic gold-patterned Tilet. Tailor-made for weddings, holidays, and celebrations.",
-    price: 8500,
-    condition: "NEW",
-    category: "Fashion",
-    images: ["https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?w=600&auto=format&fit=crop&q=80"],
-    stock: 4,
-    location: "Shiro Meda, Addis Ababa",
-    rating: 5.0,
-    isApproved: true,
-    isFeatured: true,
-    vendorId: "user-vendor-2",
-    vendorName: "Habesha Hand-Weavers",
-    createdAt: new Date(Date.now() - 3600000 * 24 * 5).toISOString()
-  },
-  {
-    id: "p5",
-    title: "AirPods Pro (2nd Generation) - USB-C",
-    description: "Authentic Apple AirPods Pro 2 with Active Noise Cancellation, Adaptive Audio, and touch controls. Comes with MagSafe Charging Case.",
-    price: 11200,
-    condition: "NEW",
-    category: "AirPods",
-    images: ["https://images.unsplash.com/photo-1549399542-7e3f8b79c341?w=600&auto=format&fit=crop&q=80"],
-    stock: 12,
-    location: "Bole, Addis Ababa",
-    rating: 4.7,
-    isApproved: true,
-    isFeatured: false,
-    vendorId: "user-vendor-1",
-    vendorName: "Bole Electronic Store (Dawit)",
-    createdAt: new Date().toISOString()
-  },
-  {
-    id: "p6",
-    title: "Toyota Vitz 2012 (Yaris Hatchback)",
-    description: "Excellent fuel efficiency, clean automatic transmission, perfect engine condition. Original silver-painted exterior. Plate code B2-A...",
-    price: 5350000,
-    condition: "USED",
-    category: "Vehicles",
-    images: ["https://images.unsplash.com/photo-1549399542-7e3f8b79c341?w=600&auto=format&fit=crop&q=80"],
-    stock: 1,
-    location: "Addis Ababa",
-    rating: 4.2,
-    isApproved: true,
-    isFeatured: true,
-    vendorId: "user-vendor-2",
-    vendorName: "Habesha Hand-Weavers",
-    createdAt: new Date(Date.now() - 3600000 * 24 * 2).toISOString()
-  },
-  {
-    id: "p7",
-    title: "Luxury 3-Bedroom Apartment in Bole",
-    description: "Prestigious location, fully furnished with security backup systems, modern kitchen appliances, reliable WiFi connection, and standard parking garage.",
-    price: 45000, // Monthly lease
-    condition: "NEW",
-    category: "Real Estate",
-    images: ["https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=600&auto=format&fit=crop&q=80"],
-    stock: 1,
-    location: "Bole, Addis Ababa",
-    rating: 4.6,
-    isApproved: true,
-    isFeatured: true,
-    vendorId: "user-vendor-2",
-    vendorName: "Habesha Hand-Weavers",
-    createdAt: new Date(Date.now() - 3600000 * 24 * 8).toISOString()
-  },
-  {
-    id: "p8",
-    title: "Organic Sidama Coffee Beans (Specialty Grade-1) - 1kg",
-    description: "Unparalleled coffee beans straight from Sidama highlands. Medium roast with light floral and citrus notes. Freshly packed on order.",
-    price: 850,
-    condition: "NEW",
-    category: "Books", // Using Books category, or Electronics/Services since categories are customizable
-    images: ["https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=600&auto=format&fit=crop&q=80"],
-    stock: 50,
-    location: "Sidama, Ethiopia",
-    rating: 5.0,
-    isApproved: true,
-    isFeatured: false,
-    vendorId: "user-vendor-2",
-    vendorName: "Habesha Hand-Weavers",
-    createdAt: new Date(Date.now() - 3600000 * 24).toISOString()
-  }
-];
-
-const SEED_REVIEWS: Review[] = [
-  {
-    id: "r1",
-    productId: "p1",
-    reviewerId: "user-buyer",
-    reviewerName: "Sisay A",
-    rating: 5,
-    comment: "Exceptional service from Dawit! The iPhone is absolutely brand new and original. Quick transaction using Telebirr.",
-    createdAt: new Date(Date.now() - 3600000 * 24 * 2).toISOString()
-  },
-  {
-    id: "r2",
-    productId: "p4",
-    reviewerId: "user-buyer",
-    reviewerName: "Yitbarek K",
-    rating: 5,
-    comment: "The embroidery and Hand-weaving details are gorgeous. It fits perfectly! Best Habesha Kemis I've ever purchased.",
-    createdAt: new Date(Date.now() - 3600000 * 24 * 4).toISOString()
-  }
-];
-
-const SEED_MESSAGES: Message[] = [
-  {
-    id: "m1",
-    text: "Meles, is the Toyota Vitz price negotiable? Can I pay part via Chapa bank transfer?",
-    senderId: "user-buyer",
-    receiverId: "user-vendor-2",
-    senderName: "Yitbarek K",
-    receiverName: "Habesha Hand-Weavers",
-    productId: "p6",
-    productTitle: "Toyota Vitz 2012 (Yaris Hatchback)",
-    isRead: true,
-    createdAt: new Date(Date.now() - 3600000 * 10).toISOString()
-  },
-  {
-    id: "m2",
-    text: "Selam Yitbarek! Yes, we can negotiate slightly. Bank transfer is highly preferred. When would you like to view the car in Bole?",
-    senderId: "user-vendor-2",
-    receiverId: "user-buyer",
-    senderName: "Habesha Hand-Weavers",
-    receiverName: "Sisay K",
-    productId: "p6",
-    productTitle: "Toyota Vitz 2012 (Yaris Hatchback)",
-    isRead: false,
-    createdAt: new Date(Date.now() - 3600000 * 9).toISOString()
-  }
-];
-
-const SEED_ORDERS: Order[] = [
-  {
-    id: "order-1",
-    buyerId: "user-buyer",
-    buyerName: "Sisay A",
-    items: [
-      {
-        productId: "p4",
-        title: "Elegant Traditional Habesha Kemis (Traditional Dress)",
-        price: 8500,
-        quantity: 1
-      }
-    ],
-    totalAmount: 8500,
-    paymentMethod: "TELEBIRR",
-    paymentStatus: "PAID",
-    deliveryStatus: "SHIPPED",
-    createdAt: new Date(Date.now() - 3600000 * 24 * 4).toISOString()
-  }
-];
-
 export class Database {
   private schema: DbSchema;
 
@@ -355,7 +97,23 @@ export class Database {
     try {
       if (fs.existsSync(DB_PATH)) {
         const fileContent = fs.readFileSync(DB_PATH, "utf-8");
-        return JSON.parse(fileContent);
+        const parsed: DbSchema = JSON.parse(fileContent);
+        // Ensure rich Ethiopian product catalogue and vendors are populated
+        if (!parsed.products || parsed.products.length < SEED_PRODUCTS.length) {
+          parsed.products = SEED_PRODUCTS;
+          parsed.users = SEED_USERS;
+          if (!parsed.reviews || parsed.reviews.length < SEED_REVIEWS.length) {
+            parsed.reviews = SEED_REVIEWS;
+          }
+          if (!parsed.messages || parsed.messages.length === 0) {
+            parsed.messages = SEED_MESSAGES;
+          }
+          if (!parsed.orders || parsed.orders.length === 0) {
+            parsed.orders = SEED_ORDERS;
+          }
+          this.save(parsed);
+        }
+        return parsed;
       }
     } catch (e) {
       console.error("Error reading db.json, generating seeds instead:", e);

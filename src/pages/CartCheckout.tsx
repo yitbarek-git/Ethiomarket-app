@@ -1,28 +1,32 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import {
-  ShoppingBag, Trash2, Heart, ArrowRight, ShieldCheck,
-  MapPin, Phone, CreditCard, Sparkles, CheckCircle2,
-  Wallet, ChevronRight, Bookmark, X
+import { 
+  ShoppingBag, Trash2, Heart, ArrowRight, ShieldCheck, 
+  MapPin, Phone, CreditCard, Sparkles, CheckCircle2, 
+  Wallet, ChevronRight, Bookmark, X 
 } from "lucide-react";
 import { useMarketStore } from "../store";
+import { useTranslation } from "../translations";
 
 export default function CartCheckout() {
-  const {
-    user,
-    cart,
-    wishlist,
-    removeFromCart,
-    updateCartQuantity,
-    clearCart,
-    addToCart,
+  const { 
+    user, 
+    cart, 
+    wishlist, 
+    removeFromCart, 
+    updateCartQuantity, 
+    clearCart, 
+    addToCart, 
     addNotification,
-    setCurrentPage
+    setCurrentPage,
+    language
   } = useMarketStore();
+
+  const { t } = useTranslation(language);
 
   // Local state
   const [shippingAddress, setShippingAddress] = useState("");
-  const [shippingPhone, setShippingPhone] = useState(user?.phone || "+2519");
+  const [shippingPhone, setShippingPhone] = useState(user?.phone || "+251911");
   const [selectedMethod, setSelectedMethod] = useState<"CASH_ON_DELIVERY" | "TELEBIRR" | "CHAPA">("TELEBIRR");
 
   // Gateway Modals
@@ -31,7 +35,7 @@ export default function CartCheckout() {
   const [orderSuccessId, setOrderSuccessId] = useState<string | null>(null);
 
   // Telebirr simulation portal inputs
-  const [telebirrPhone, setTelebirrPhone] = useState(user?.phone || "+2519");
+  const [telebirrPhone, setTelebirrPhone] = useState(user?.phone || "+251911");
   const [telebirrOtp, setTelebirrOtp] = useState("");
   const [telebirrLoading, setTelebirrLoading] = useState(false);
 
@@ -60,7 +64,7 @@ export default function CartCheckout() {
       return;
     }
     if (!shippingAddress.trim() || !shippingPhone.trim()) {
-      addNotification("Please enter delivery address and phone coordinate.");
+      addNotification("Please enter your delivery address and phone number.");
       return;
     }
 
@@ -157,13 +161,13 @@ export default function CartCheckout() {
     <div className="space-y-12">
       {/* 1. Header Row */}
       <div className="border-b border-neutral-100 pb-6 text-left">
-        <h1 className="text-3xl font-bold tracking-tight text-neutral-900">Checkout Cart</h1>
-        <p className="text-neutral-500 text-sm">Review your bundles, choose local payment gateways, and finalize transactions</p>
+        <h1 className="text-3xl font-bold tracking-tight text-neutral-900">{t("cart")} / {t("checkout")}</h1>
+        <p className="text-neutral-500 text-sm">Review your items, choose your payment method, and complete your order</p>
       </div>
 
       {/* Success Receipt Card */}
       {orderSuccessId ? (
-        <motion.div
+        <motion.div 
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           className="max-w-xl mx-auto p-8 border border-emerald-100 rounded-3xl bg-emerald-50/50 text-center space-y-6"
@@ -172,23 +176,23 @@ export default function CartCheckout() {
             <CheckCircle2 className="w-10 h-10" />
           </div>
           <div className="space-y-2">
-            <h2 className="text-2xl font-sans font-bold text-neutral-900">Transaction Complete!</h2>
+            <h2 className="text-2xl font-sans font-bold text-neutral-900">Order Placed Successfully!</h2>
             <p className="text-xs text-neutral-600 font-normal">
-              Your bargain has been queued on EthioMarket's transactional pipeline. The listing vendor has been notified inside their dashboard chat.
+              Your order has been recorded. The seller has been notified to prepare your package.
             </p>
           </div>
 
           <div className="p-4 bg-white border border-emerald-100/50 rounded-2xl font-mono text-left space-y-2">
             <div className="flex justify-between text-xs text-neutral-500">
-              <span>Order ID:</span>
+              <span>Order Reference:</span>
               <span className="font-bold text-neutral-900">{orderSuccessId}</span>
             </div>
             <div className="flex justify-between text-xs text-neutral-500">
-              <span>Payment Gateway:</span>
+              <span>Payment Method:</span>
               <span className="font-bold text-neutral-900 tracking-wider text-[10px] bg-amber-100 px-2 py-0.5 rounded uppercase">{selectedMethod}</span>
             </div>
             <div className="flex justify-between text-xs text-neutral-500">
-              <span>Total Amount Recipient:</span>
+              <span>Total Paid:</span>
               <span className="font-bold text-neutral-900">{orderTotal.toLocaleString()} ETB</span>
             </div>
           </div>
@@ -216,13 +220,13 @@ export default function CartCheckout() {
         </motion.div>
       ) : (
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-10 items-start">
-
+          
           {/* LEFT LIST: CART PANEL SUMMARY */}
           <div className="lg:col-span-2 space-y-8">
             <div className="space-y-4">
               <h2 className="text-xl font-bold text-neutral-900 flex items-center gap-2">
                 <ShoppingBag className="w-5 h-5 text-amber-500" />
-                Selected Items ({cart.length})
+                {t("cart")} ({cart.length})
               </h2>
 
               {cart.length === 0 ? (
@@ -238,49 +242,70 @@ export default function CartCheckout() {
               ) : (
                 <div className="space-y-3">
                   {cart.map((item) => (
-                    <div key={item.id} className="p-4 border border-neutral-200 rounded-2xl flex gap-4 bg-white items-center">
-                      <div className="w-16 h-16 rounded-xl overflow-hidden bg-neutral-100 shrink-0">
-                        <img
-                          src={item.images[0]}
-                          alt={item.title}
-                          className="w-full h-full object-cover"
-                          referrerPolicy="no-referrer"
-                        />
-                      </div>
-
-                      <div className="flex-grow min-w-0">
-                        <h4 className="font-semibold text-neutral-800 text-sm truncate">{item.title}</h4>
-                        <div className="flex items-center gap-3 text-xs text-neutral-500 font-mono font-semibold mt-0.5">
-                          <span>{item.price.toLocaleString()} ETB</span>
-                          <span>•</span>
-                          <span className="text-amber-600">Vendor: {item.vendorName.split(" ")[0]}</span>
+                    <div key={item.id} className="p-3.5 sm:p-4 border border-neutral-200 rounded-2xl flex flex-col sm:flex-row gap-3 sm:gap-4 bg-white sm:items-center">
+                      {/* Mobile Top Row / Desktop Left Section */}
+                      <div className="flex items-center gap-3 min-w-0 flex-grow">
+                        <div className="w-14 h-14 sm:w-16 sm:h-16 rounded-xl overflow-hidden bg-neutral-100 shrink-0">
+                          <img 
+                            src={item.images[0]} 
+                            alt={item.title} 
+                            className="w-full h-full object-cover"
+                            referrerPolicy="no-referrer"
+                          />
                         </div>
+
+                        <div className="min-w-0 flex-grow">
+                          <h4 className="font-semibold text-neutral-800 text-xs sm:text-sm truncate">{item.title}</h4>
+                          <div className="flex items-center gap-2 text-[11px] sm:text-xs text-neutral-500 font-mono font-semibold mt-0.5">
+                            <span>{item.price.toLocaleString()} ETB</span>
+                            <span>•</span>
+                            <span className="text-amber-600 truncate">{t("vendor")}: {item.vendorName.split(" ")[0]}</span>
+                          </div>
+                        </div>
+
+                        {/* Mobile Trash button */}
+                        <button
+                          onClick={() => removeFromCart(item.id)}
+                          className="p-1.5 text-neutral-400 hover:text-red-500 transition-colors shrink-0 cursor-pointer sm:hidden"
+                          title="Remove item"
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </button>
                       </div>
 
-                      {/* Quantity manipulation selector */}
-                      <div className="flex items-center gap-2 shrink-0 border border-neutral-150 rounded-lg p-1 px-1.5 bg-neutral-50">
+                      {/* Mobile Bottom Row / Desktop Right Section */}
+                      <div className="flex items-center justify-between sm:justify-end gap-3 pt-2 sm:pt-0 border-t border-neutral-100 sm:border-t-0">
+                        {/* Subtotal for item on mobile */}
+                        <span className="sm:hidden font-mono font-bold text-xs text-neutral-900">
+                          {(item.price * item.quantity).toLocaleString()} ETB
+                        </span>
+
+                        {/* Quantity manipulation selector */}
+                        <div className="flex items-center gap-2 shrink-0 border border-neutral-150 rounded-lg p-1 px-1.5 bg-neutral-50">
+                          <button
+                            onClick={() => updateCartQuantity(item.id, item.quantity - 1)}
+                            className="w-6 h-6 flex items-center justify-center font-bold text-neutral-500 hover:text-neutral-900 cursor-pointer"
+                          >
+                            -
+                          </button>
+                          <span className="text-xs font-bold font-mono text-neutral-800 w-5 text-center">{item.quantity}</span>
+                          <button
+                            onClick={() => updateCartQuantity(item.id, item.quantity + 1)}
+                            className="w-6 h-6 flex items-center justify-center font-bold text-neutral-500 hover:text-neutral-900 cursor-pointer"
+                          >
+                            +
+                          </button>
+                        </div>
+
+                        {/* Desktop Delete item */}
                         <button
-                          onClick={() => updateCartQuantity(item.id, item.quantity - 1)}
-                          className="w-5 h-5 flex items-center justify-center font-bold text-neutral-500 hover:text-neutral-900 cursor-pointer"
+                          onClick={() => removeFromCart(item.id)}
+                          className="p-2 text-neutral-400 hover:text-red-500 transition-colors shrink-0 cursor-pointer hidden sm:block"
+                          title="Remove item"
                         >
-                          -
-                        </button>
-                        <span className="text-xs font-bold font-mono text-neutral-800 w-4 text-center">{item.quantity}</span>
-                        <button
-                          onClick={() => updateCartQuantity(item.id, item.quantity + 1)}
-                          className="w-5 h-5 flex items-center justify-center font-bold text-neutral-500 hover:text-neutral-900 cursor-pointer"
-                        >
-                          +
+                          <Trash2 className="w-4 h-4" />
                         </button>
                       </div>
-
-                      {/* Delete item */}
-                      <button
-                        onClick={() => removeFromCart(item.id)}
-                        className="p-2 text-neutral-400 hover:text-red-500 transition-colors shrink-0 cursor-pointer"
-                      >
-                        <Trash2 className="w-4 h-4" />
-                      </button>
                     </div>
                   ))}
                 </div>
@@ -291,7 +316,7 @@ export default function CartCheckout() {
             <div className="space-y-4 border-t border-neutral-100 pt-8">
               <h2 className="text-xl font-bold text-neutral-900 flex items-center gap-2">
                 <Bookmark className="w-5 h-5 text-amber-500" />
-                Saved Wishlist ({wishlist.length})
+                {t("wishlist")} ({wishlist.length})
               </h2>
 
               {wishlist.length === 0 ? (
@@ -301,9 +326,9 @@ export default function CartCheckout() {
                   {wishlist.map((it) => (
                     <div key={it.id} className="p-3 border border-neutral-150 rounded-2xl flex gap-3 bg-white hover:shadow-md transition-shadow">
                       <div className="w-12 h-12 rounded-xl overflow-hidden bg-neutral-50 shrink-0">
-                        <img
-                          src={it.images[0]}
-                          alt={it.title}
+                        <img 
+                          src={it.images[0]} 
+                          alt={it.title} 
                           className="w-full h-full object-cover"
                           referrerPolicy="no-referrer"
                         />
@@ -316,7 +341,7 @@ export default function CartCheckout() {
                         onClick={() => addToCart(it)}
                         className="p-2 h-fit bg-neutral-100 hover:bg-neutral-200 text-neutral-800 rounded-lg text-xs font-semibold cursor-pointer shrink-0"
                       >
-                        Buy
+                        {t("buyNow")}
                       </button>
                     </div>
                   ))}
@@ -327,24 +352,23 @@ export default function CartCheckout() {
 
           {/* RIGHT SIDEBAR: ORDER BILLING & COGNITIVE CHECKS */}
           <div className="lg:col-span-1 border border-neutral-200 rounded-2xl bg-white p-5 space-y-6">
-            <h3 className="font-sans font-bold text-neutral-900 text-sm border-b border-neutral-50 pb-2">Order Bill Invoice</h3>
+            <h3 className="font-sans font-bold text-neutral-900 text-sm border-b border-neutral-50 pb-2">{t("checkout")}</h3>
 
             {/* Price lines */}
             <div className="space-y-3 font-mono text-xs text-neutral-600">
               <div className="flex justify-between">
-                <span>Total Items ({totalItemCount}):</span>
+                <span>{t("subtotal")} ({totalItemCount}):</span>
                 <span>{subtotal.toLocaleString()} ETB</span>
               </div>
               <div className="flex justify-between">
-                <span>Shipping Delivery Fee:</span>
+                <span>{t("shipping")}:</span>
                 <span>{shippingFee.toLocaleString()} ETB</span>
               </div>
               <div className="flex justify-between text-neutral-900 font-bold border-t border-neutral-100 pt-3 text-sm">
-                <span>Total Bill (Birr):</span>
+                <span>{t("total")}:</span>
                 <span className="text-amber-600">{orderTotal.toLocaleString()} ETB</span>
               </div>
             </div>
-
 
             {/* Check out form details */}
             <form onSubmit={handleInitiatePayment} className="space-y-4 pt-4 border-t border-neutral-50">
@@ -366,7 +390,7 @@ export default function CartCheckout() {
                 <label className="text-xs font-bold text-neutral-400 uppercase tracking-wider font-mono">Contact Phone Coordinate</label>
                 <input
                   type="tel"
-                  placeholder="e.g. +251 9"
+                  placeholder="e.g. +251 911"
                   value={shippingPhone}
                   onChange={(e) => setShippingPhone(e.target.value)}
                   required
@@ -381,14 +405,15 @@ export default function CartCheckout() {
                   <button
                     type="button"
                     onClick={() => setSelectedMethod("TELEBIRR")}
-                    className={`p-3 rounded-xl border flex items-center justify-between cursor-pointer transition-all ${selectedMethod === "TELEBIRR"
-                      ? "border-emerald-500 bg-emerald-50/40 font-bold text-emerald-900"
-                      : "border-neutral-200 hover:bg-neutral-50 text-neutral-700"
-                      }`}
+                    className={`p-3 rounded-xl border flex items-center justify-between cursor-pointer transition-all ${
+                      selectedMethod === "TELEBIRR" 
+                        ? "border-emerald-500 bg-emerald-50/40 font-bold text-emerald-900" 
+                        : "border-neutral-200 hover:bg-neutral-50 text-neutral-700"
+                    }`}
                   >
                     <div className="flex items-center gap-2">
                       <Wallet className="w-4 h-4 text-emerald-600 shrink-0" />
-                      <span className="text-xs">Telebirr Portal Mobile Wallet</span>
+                      <span className="text-xs">{t("payWithTelebirr")}</span>
                     </div>
                     {selectedMethod === "TELEBIRR" && <CheckCircle2 className="w-4 h-4 text-emerald-600" />}
                   </button>
@@ -396,14 +421,15 @@ export default function CartCheckout() {
                   <button
                     type="button"
                     onClick={() => setSelectedMethod("CHAPA")}
-                    className={`p-3 rounded-xl border flex items-center justify-between cursor-pointer transition-all ${selectedMethod === "CHAPA"
-                      ? "border-amber-500 bg-amber-50/40 font-bold text-amber-900"
-                      : "border-neutral-200 hover:bg-neutral-50 text-neutral-700"
-                      }`}
+                    className={`p-3 rounded-xl border flex items-center justify-between cursor-pointer transition-all ${
+                      selectedMethod === "CHAPA" 
+                        ? "border-amber-500 bg-amber-50/40 font-bold text-amber-900" 
+                        : "border-neutral-200 hover:bg-neutral-50 text-neutral-700"
+                    }`}
                   >
                     <div className="flex items-center gap-2">
                       <CreditCard className="w-4 h-4 text-amber-600 shrink-0" />
-                      <span className="text-xs">Chapa Payment Gateway (Cards)</span>
+                      <span className="text-xs">{t("payWithChapa")}</span>
                     </div>
                     {selectedMethod === "CHAPA" && <CheckCircle2 className="w-4 h-4 text-amber-600" />}
                   </button>
@@ -411,14 +437,15 @@ export default function CartCheckout() {
                   <button
                     type="button"
                     onClick={() => setSelectedMethod("CASH_ON_DELIVERY")}
-                    className={`p-3 rounded-xl border flex items-center justify-between cursor-pointer transition-all ${selectedMethod === "CASH_ON_DELIVERY"
-                      ? "border-neutral-900 bg-neutral-55/10 font-bold text-neutral-900"
-                      : "border-neutral-200 hover:bg-neutral-50 text-neutral-700"
-                      }`}
+                    className={`p-3 rounded-xl border flex items-center justify-between cursor-pointer transition-all ${
+                      selectedMethod === "CASH_ON_DELIVERY" 
+                        ? "border-neutral-900 bg-neutral-55/10 font-bold text-neutral-900" 
+                        : "border-neutral-200 hover:bg-neutral-50 text-neutral-700"
+                    }`}
                   >
                     <div className="flex items-center gap-2">
                       <ShieldCheck className="w-4 h-4 text-neutral-500 shrink-0" />
-                      <span className="text-xs">Cash on Delivery</span>
+                      <span className="text-xs">{t("cashOnDelivery")}</span>
                     </div>
                   </button>
                 </div>
@@ -429,7 +456,7 @@ export default function CartCheckout() {
                 disabled={cart.length === 0}
                 className="w-full py-3.5 bg-neutral-950 text-white font-semibold rounded-xl text-xs hover:bg-neutral-800 transition-all cursor-pointer disabled:opacity-50"
               >
-                Place Bill Order ({orderTotal.toLocaleString()} ETB)
+                {t("checkout")} ({orderTotal.toLocaleString()} ETB)
               </button>
             </form>
           </div>
@@ -437,17 +464,19 @@ export default function CartCheckout() {
       )}
 
 
-      {/*GATEWAY MODAL SIMULATION: TELEBIRR*/}
+      {/* =======================================================
+          GATEWAY MODAL SIMULATION: TELEBIRR
+          ======================================================= */}
       <AnimatePresence>
         {telebirrModalOpen && (
           <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
-            <motion.div
+            <motion.div 
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
-              className="bg-emerald-900 text-white rounded-3xl p-6 w-full max-w-sm border border-emerald-500 relative shadow-2xl space-y-5"
+              className="bg-emerald-900 text-white rounded-3xl p-5 sm:p-6 w-full max-w-sm max-h-[90vh] overflow-y-auto border border-emerald-500 relative shadow-2xl space-y-4 sm:space-y-5"
             >
-              <button
+              <button 
                 onClick={() => setTelebirrModalOpen(false)}
                 className="absolute top-4 right-4 text-emerald-200 hover:text-white"
               >
@@ -509,17 +538,19 @@ export default function CartCheckout() {
       </AnimatePresence>
 
 
-      {/* GATEWAY MODAL SIMULATION: CHAPA */}
+      {/* =======================================================
+          GATEWAY MODAL SIMULATION: CHAPA
+          ======================================================= */}
       <AnimatePresence>
         {chapaModalOpen && (
           <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
-            <motion.div
+            <motion.div 
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
-              className="bg-zinc-950 text-white rounded-3xl p-6 w-full max-w-sm border border-amber-500/30 relative shadow-2xl space-y-5"
+              className="bg-zinc-950 text-white rounded-3xl p-5 sm:p-6 w-full max-w-sm max-h-[90vh] overflow-y-auto border border-amber-500/30 relative shadow-2xl space-y-4 sm:space-y-5"
             >
-              <button
+              <button 
                 onClick={() => setChapaModalOpen(false)}
                 className="absolute top-4 right-4 text-neutral-300 hover:text-white"
               >

@@ -1,6 +1,6 @@
 {
   "name": "EthioMarket",
-  "description": "An Ethiopian online marketplace connecting local vendors and individuals for listing, buying, and selling products across Ethiopia with native payment integrations.",
+  "description": "An Ethiopian online marketplace connecting local vendors and buyers across Ethiopia with native payments and multilingual support in Amharic, Oromifa, Tigrinya, and Somali.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

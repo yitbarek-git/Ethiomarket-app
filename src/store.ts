@@ -1,11 +1,15 @@
 import { create } from "zustand";
-import { User, Product, Order, Message, Review } from "./types";
+import { User, Product, Order, Message, Review, LanguageCode } from "./types";
 
 interface CartItem extends Product {
   quantity: number;
 }
 
 interface MarketStore {
+  // Language Localization State
+  language: LanguageCode;
+  setLanguage: (lang: LanguageCode) => void;
+
   // Authentication State
   user: User | null;
   token: string | null;
@@ -27,6 +31,7 @@ interface MarketStore {
     minPrice: string;
     maxPrice: string;
     sortBy: string;
+    location: string;
   };
   setFilter: (key: string, value: string) => void;
   resetFilters: () => void;
@@ -54,9 +59,20 @@ interface MarketStore {
   notifications: string[];
   addNotification: (message: string) => void;
   clearNotifications: () => void;
+
+  // AI Copilot Modal State
+  isAiOpen: boolean;
+  setAiOpen: (open: boolean) => void;
 }
 
 export const useMarketStore = create<MarketStore>((set, get) => ({
+  // Language Localization State (defaults to 'en' with localStorage persistence)
+  language: (localStorage.getItem("ethio_lang") as LanguageCode) || "en",
+  setLanguage: (lang: LanguageCode) => {
+    localStorage.setItem("ethio_lang", lang);
+    set({ language: lang });
+  },
+
   // Auth initialized from localStorage for fluid persistence
   user: JSON.parse(localStorage.getItem("ethio_user") || "null"),
   token: localStorage.getItem("ethio_token"),
@@ -93,7 +109,8 @@ export const useMarketStore = create<MarketStore>((set, get) => ({
     condition: "",
     minPrice: "",
     maxPrice: "",
-    sortBy: "newest"
+    sortBy: "newest",
+    location: ""
   },
   setFilter: (key, value) => set((state) => ({
     filters: { ...state.filters, [key]: value }
@@ -104,7 +121,8 @@ export const useMarketStore = create<MarketStore>((set, get) => ({
       condition: "",
       minPrice: "",
       maxPrice: "",
-      sortBy: "newest"
+      sortBy: "newest",
+      location: ""
     }
   }),
 
@@ -179,4 +197,8 @@ export const useMarketStore = create<MarketStore>((set, get) => ({
     notifications: [...state.notifications, message]
   })),
   clearNotifications: () => set({ notifications: [] }),
+
+  // AI Copilot Modal State
+  isAiOpen: false,
+  setAiOpen: (open: boolean) => set({ isAiOpen: open }),
 }));

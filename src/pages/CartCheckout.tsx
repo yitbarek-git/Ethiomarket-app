@@ -231,7 +231,7 @@ export default function CartCheckout() {
 
               {cart.length === 0 ? (
                 <div className="p-8 bg-neutral-50 rounded-2xl text-center border border-neutral-100/30 space-y-3">
-                  <p className="text-xs text-neutral-500">Your shopping cart is currently empty. Explore the finest products across Ethiopia to load bargains!</p>
+                  <p className="text-xs text-neutral-500">Your shopping cart is currently empty. Explore verified listings across Ethiopia to find great deals on phones, laptops, cultural fashion, and specialty coffee!</p>
                   <button
                     onClick={() => setCurrentPage("marketplace")}
                     className="px-4 py-2 bg-neutral-950 text-white rounded-xl text-xs font-semibold cursor-pointer inline-flex items-center gap-1.5"
@@ -249,6 +249,9 @@ export default function CartCheckout() {
                           <img 
                             src={item.images[0]} 
                             alt={item.title} 
+                            onError={(e) => {
+                              (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&auto=format&fit=crop&q=80";
+                            }}
                             className="w-full h-full object-cover"
                             referrerPolicy="no-referrer"
                           />
@@ -329,6 +332,9 @@ export default function CartCheckout() {
                         <img 
                           src={it.images[0]} 
                           alt={it.title} 
+                          onError={(e) => {
+                            (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&auto=format&fit=crop&q=80";
+                          }}
                           className="w-full h-full object-cover"
                           referrerPolicy="no-referrer"
                         />

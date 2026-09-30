@@ -22,6 +22,7 @@ export default function Marketplace({ products: propProducts }: MarketplaceProps
     isInWishlist,
     setCurrentPage,
     activeCategory,
+    setActiveCategory,
     language,
     setLanguage
   } = useMarketStore();
@@ -30,7 +31,6 @@ export default function Marketplace({ products: propProducts }: MarketplaceProps
 
   useEffect(() => {
     async function loadProducts() {
-      if (storeProducts && storeProducts.length > 0) return;
       try {
         const res = await fetch("/api/products");
         const data = await res.json();
@@ -42,7 +42,7 @@ export default function Marketplace({ products: propProducts }: MarketplaceProps
       }
     }
     loadProducts();
-  }, [storeProducts]);
+  }, []);
 
   const products = propProducts || storeProducts || [];
 
@@ -225,10 +225,10 @@ export default function Marketplace({ products: propProducts }: MarketplaceProps
             <button
               onClick={() => {
                 resetFilters();
+                setActiveCategory("All");
                 setLocalSearch("");
-                setFilter("condition", "");
               }}
-              className="text-[11px] text-amber-600 font-semibold hover:text-amber-700 cursor-pointer flex items-center gap-1"
+              className="text-[11px] text-amber-600 font-semibold hover:text-amber-700 cursor-pointer flex items-center gap-1 transition-colors"
             >
               <RefreshCcw className="w-3 h-3" /> {t("reset")}
             </button>
@@ -237,23 +237,24 @@ export default function Marketplace({ products: propProducts }: MarketplaceProps
           {/* Categories Tab list */}
           <div className="space-y-2">
             <label className="text-xs font-bold text-neutral-400 uppercase tracking-wider font-mono">{t("category")}</label>
-            <div className="flex flex-col gap-1 max-h-52 overflow-y-auto pr-1">
+            <div className="flex flex-col gap-1 max-h-80 sm:max-h-96 overflow-y-auto pr-1.5">
               {categories.map((cat) => {
                 const isActive = (activeCategory || "All") === cat;
                 return (
                   <button
                     key={cat}
-                    onClick={() => setFilter("category", cat === "All" ? "" : cat)}
-                    className={`w-full text-left px-3 py-2 rounded-lg text-xs font-medium cursor-pointer transition-colors flex items-center justify-between ${
+                    onClick={() => setActiveCategory(activeCategory === cat && cat !== "All" ? "All" : cat)}
+                    className={`w-full text-left px-3 py-2 rounded-xl text-xs font-medium cursor-pointer transition-all flex items-center justify-between min-h-[38px] ${
                       isActive 
-                        ? "bg-amber-500 text-neutral-950 font-bold" 
-                        : "text-neutral-600 hover:bg-neutral-50"
+                        ? "bg-amber-500 text-neutral-950 font-bold shadow-xs scale-[1.01]" 
+                        : "text-neutral-600 hover:bg-neutral-100 hover:text-neutral-900"
                     }`}
                   >
-                    <span className="flex items-center gap-2">
-                      <span>{categoryIcons[cat] || "🏷️"}</span>
-                      <span>{getCategoryLabel(cat)}</span>
+                    <span className="flex items-center gap-2.5">
+                      <span className="text-sm shrink-0">{categoryIcons[cat] || "🏷️"}</span>
+                      <span className="truncate">{getCategoryLabel(cat)}</span>
                     </span>
+                    {isActive && <span className="w-1.5 h-1.5 rounded-full bg-neutral-950 shrink-0"></span>}
                   </button>
                 );
               })}
@@ -334,7 +335,7 @@ export default function Marketplace({ products: propProducts }: MarketplaceProps
                 return (
                   <button
                     key={cat}
-                    onClick={() => setFilter("category", cat === "All" ? "" : cat)}
+                    onClick={() => setActiveCategory(activeCategory === cat && cat !== "All" ? "All" : cat)}
                     className={`min-h-[44px] px-3.5 py-2 rounded-xl text-xs font-semibold whitespace-nowrap flex items-center gap-2 cursor-pointer transition-all ${
                       isActive
                         ? "bg-amber-500 text-neutral-950 shadow-sm font-bold scale-102"
@@ -404,13 +405,27 @@ export default function Marketplace({ products: propProducts }: MarketplaceProps
             </div>
           </div>
 
-          {/* Active Filters Badges */}
-          <div className="flex gap-2 items-center flex-wrap">
-            <span className="text-xs text-neutral-400 font-mono uppercase tracking-wider font-medium">{t("filters")}:</span>
-            <span className="px-3 py-1 rounded-full bg-amber-50 text-amber-700 text-xs font-bold border border-amber-200/50 flex items-center gap-1">
-              {getCategoryLabel(activeCategory || "All")}
-            </span>
-            {filters.location && (
+            {/* Active Filters Badges */}
+            <div className="flex gap-2 items-center flex-wrap">
+              <span className="text-xs text-neutral-400 font-mono uppercase tracking-wider font-medium">{t("filters")}:</span>
+              {activeCategory && activeCategory !== "All" ? (
+                <span className="px-3 py-1 rounded-full bg-amber-50 text-amber-800 text-xs font-bold border border-amber-200/50 flex items-center gap-1.5">
+                  <span>{categoryIcons[activeCategory] || "🏷️"}</span>
+                  <span>{getCategoryLabel(activeCategory)}</span>
+                  <button
+                    onClick={() => setActiveCategory("All")}
+                    className="hover:text-red-500 ml-0.5 cursor-pointer p-0.5 rounded-full hover:bg-amber-100 transition-colors"
+                    title="Clear category filter"
+                  >
+                    <X className="w-3 h-3" />
+                  </button>
+                </span>
+              ) : (
+                <span className="px-3 py-1 rounded-full bg-neutral-100 text-neutral-600 text-xs font-semibold border border-neutral-200/40">
+                  {t("catAll")}
+                </span>
+              )}
+              {filters.location && (
               <span className="px-3 py-1 rounded-full bg-blue-50 text-blue-700 text-xs font-semibold border border-blue-200/40 flex items-center gap-1">
                 <MapPin className="w-3 h-3" />
                 {locations.find(l => l.value === filters.location)?.label || filters.location}
@@ -611,9 +626,8 @@ export default function Marketplace({ products: propProducts }: MarketplaceProps
               <button
                 onClick={() => {
                   resetFilters();
+                  setActiveCategory("All");
                   setLocalSearch("");
-                  setFilter("condition", "");
-                  setFilter("location", "");
                   setShowMobileFilters(false);
                 }}
                 className="w-full min-h-[44px] py-2.5 bg-neutral-100 hover:bg-neutral-200 text-neutral-700 text-xs font-semibold rounded-xl cursor-pointer text-center"
@@ -652,7 +666,7 @@ export default function Marketplace({ products: propProducts }: MarketplaceProps
                       <button
                         key={cat}
                         onClick={() => {
-                          setFilter("category", cat === "All" ? "" : cat);
+                          setActiveCategory(activeCategory === cat && cat !== "All" ? "All" : cat);
                           setShowMobileFilters(false);
                         }}
                         className={`min-h-[44px] text-left px-3 py-2 rounded-lg text-xs font-medium cursor-pointer transition-colors flex items-center gap-1.5 ${

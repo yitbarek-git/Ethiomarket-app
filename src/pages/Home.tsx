@@ -210,12 +210,12 @@ export default function Home({ products: propProducts }: HomeProps) {
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       referrerPolicy="no-referrer"
                     />
-                    <div className="absolute top-2.5 left-2.5 flex gap-1.5 flex-wrap">
-                      <span className="px-2 py-0.5 rounded-full bg-neutral-900/80 backdrop-blur-md text-white text-[9px] sm:text-[10px] font-mono tracking-wider font-semibold">
-                        FEATURED
+                    <div className="absolute top-2.5 left-2.5 flex items-center gap-1.5">
+                      <span className="px-2 py-0.5 rounded-md bg-neutral-950/80 backdrop-blur-md text-white text-[9px] font-mono tracking-wider font-semibold">
+                        Featured
                       </span>
-                      <span className={`px-2 py-0.5 text-[9px] font-mono uppercase rounded-full tracking-wider font-bold ${
-                        p.condition === "NEW" ? "bg-emerald-500 text-white" : "bg-teal-500 text-white"
+                      <span className={`px-2 py-0.5 text-[9px] font-mono rounded-md font-bold uppercase ${
+                        p.condition === "NEW" ? "bg-emerald-600 text-white" : "bg-neutral-800 text-neutral-200"
                       }`}>
                         {p.condition}
                       </span>
@@ -298,8 +298,8 @@ export default function Home({ products: propProducts }: HomeProps) {
                     referrerPolicy="no-referrer"
                   />
                   <div className="absolute top-2.5 left-2.5">
-                    <span className={`px-2 py-0.5 text-[9px] font-mono uppercase rounded-full tracking-wider font-bold ${
-                      p.condition === "NEW" ? "bg-emerald-500 text-white" : "bg-teal-500 text-white"
+                    <span className={`px-2 py-0.5 text-[9px] font-mono rounded-md font-bold uppercase ${
+                      p.condition === "NEW" ? "bg-emerald-600 text-white" : "bg-neutral-800 text-neutral-200"
                     }`}>
                       {p.condition}
                     </span>
@@ -375,11 +375,23 @@ export default function Home({ products: propProducts }: HomeProps) {
               <CheckCircle2 className="w-4 h-4 sm:w-4.5 sm:h-4.5 text-emerald-600 shrink-0" /> {t("storyBullet3")}
             </li>
           </ul>
+          <div className="pt-1">
+            <button
+              onClick={() => setCurrentPage("marketplace", null, "Agro & Coffee")}
+              className="px-5 py-2.5 bg-neutral-950 hover:bg-neutral-800 text-white rounded-xl text-xs sm:text-sm font-semibold inline-flex items-center gap-2 cursor-pointer transition-colors shadow-sm"
+            >
+              <span>{t("catAgro")}</span>
+              <ArrowRight className="w-4 h-4" />
+            </button>
+          </div>
         </div>
         <div className="flex-1 w-full max-w-md shrink-0">
           <img 
             src="https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=600&auto=format&fit=crop&q=80" 
             alt="Ethiopian Coffee bean trade"
+            onError={(e) => {
+              (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=600&auto=format&fit=crop&q=80";
+            }}
             className="w-full aspect-4/3 object-cover rounded-xl sm:rounded-2xl shadow-xl border border-amber-200"
             referrerPolicy="no-referrer"
           />

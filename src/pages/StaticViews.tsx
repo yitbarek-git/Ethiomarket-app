@@ -124,46 +124,51 @@ export default function StaticViews({ viewType }: StaticViewsProps) {
                 <MapPin className="w-4 h-4" />
               </div>
               <div>
-                <span className="block text-[9px] text-neutral-400 font-bold uppercase tracking-wider">Office</span>
-                <span className="text-neutral-800">Bole, Addis Ababa, Ethiopia</span>
+                <span className="block text-[9px] text-neutral-400 font-bold uppercase tracking-wider">Headquarters</span>
+                <span className="text-neutral-800">Bole Road, Near Medhanialem, Addis Ababa, Ethiopia</span>
               </div>
             </div>
           </div>
 
-          {/* Simple simulated maps iframe */}
-          <div className="rounded-2xl overflow-hidden border border-neutral-200 h-44 bg-neutral-100 flex items-center justify-center p-4 text-center">
-            <div className="text-neutral-400 space-y-1">
-              <MapPin className="w-6 h-6 mx-auto text-red-500 animate-bounce" />
-              <p className="text-[10px] font-mono uppercase tracking-wider font-bold">bole office coordinates map</p>
-              <p className="text-[9px] text-neutral-450">District 03, Shala Park Office blocks</p>
+          {/* Simple location summary card */}
+          <div className="rounded-2xl border border-neutral-200 bg-neutral-50/70 p-5 space-y-2">
+            <div className="flex items-center gap-2 text-neutral-900 font-semibold text-xs">
+              <MapPin className="w-4 h-4 text-amber-600" />
+              <span>Addis Ababa Operations Hub</span>
+            </div>
+            <p className="text-[11px] text-neutral-500 leading-relaxed">
+              Customer support, merchant verification desks, and regional courier dispatch coordination.
+            </p>
+            <div className="pt-1 text-[10px] text-neutral-400 font-mono">
+              Working Hours: Mon – Sat, 8:30 AM – 6:00 PM (EAT)
             </div>
           </div>
         </div>
 
         {/* Right Column message form */}
-        <div className="bg-white border border-neutral-200 rounded-2xl p-6 space-y-4 relative">
+        <div className="bg-white border border-neutral-200 rounded-2xl p-6 space-y-4 relative shadow-xs">
           {submitted ? (
             <div className="text-center py-10 space-y-4">
               <div className="w-12 h-12 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center mx-auto">
                 <CheckCircle2 className="w-6 h-6" />
               </div>
-              <h3 className="text-base font-bold text-neutral-900 leading-none">Inquiry Transmitted!</h3>
+              <h3 className="text-base font-bold text-neutral-900 leading-none">Message Sent Successfully!</h3>
               <p className="text-xs text-neutral-500 max-w-xs mx-auto leading-relaxed">
-                Thank you. Your message has been routed to EthioMarket's regional queue. We will contact you at your provided email coordinate.
+                Thank you for reaching out. Our support team in Addis Ababa will review your inquiry and reply to your email within 24 hours.
               </p>
               <button
                 onClick={() => setSubmitted(false)}
-                className="px-4 py-1.5 bg-neutral-900 hover:bg-neutral-800 text-white text-xs font-semibold rounded-lg cursor-pointer"
+                className="px-4 py-2 bg-neutral-900 hover:bg-neutral-800 text-white text-xs font-semibold rounded-xl cursor-pointer"
               >
-                Send Another
+                Send Another Message
               </button>
             </div>
           ) : (
             <form onSubmit={handleContactSubmit} className="space-y-4 text-left">
-              <h3 className="font-sans font-bold text-neutral-900 text-sm border-b border-neutral-50 pb-2">Direct Message</h3>
+              <h3 className="font-sans font-bold text-neutral-900 text-sm border-b border-neutral-100 pb-2">Send Us a Message</h3>
 
               <div className="space-y-1">
-                <label className="text-[10px] font-bold text-neutral-400 uppercase tracking-wider font-mono">My Name</label>
+                <label className="text-[10px] font-bold text-neutral-400 uppercase tracking-wider font-mono">Full Name</label>
                 <input
                   type="text"
                   placeholder="e.g. Almaz Kebede"
@@ -175,7 +180,7 @@ export default function StaticViews({ viewType }: StaticViewsProps) {
               </div>
 
               <div className="space-y-1">
-                <label className="text-[10px] font-bold text-neutral-400 uppercase tracking-wider font-mono">My Email Address</label>
+                <label className="text-[10px] font-bold text-neutral-400 uppercase tracking-wider font-mono">Email Address</label>
                 <input
                   type="email"
                   placeholder="almaz@example.com"
@@ -187,9 +192,9 @@ export default function StaticViews({ viewType }: StaticViewsProps) {
               </div>
 
               <div className="space-y-1">
-                <label className="text-[10px] font-bold text-neutral-400 uppercase tracking-wider font-mono">Inquiry Text</label>
+                <label className="text-[10px] font-bold text-neutral-400 uppercase tracking-wider font-mono">How can we help?</label>
                 <textarea
-                  placeholder="Ask and clarify specifications about listings verification, payment gateways, or layout assistance..."
+                  placeholder="Ask about vendor verification, payments (Telebirr/Chapa), order delivery, or listing a product..."
                   value={conMsg}
                   onChange={(e) => setConMsg(e.target.value)}
                   required
@@ -200,10 +205,10 @@ export default function StaticViews({ viewType }: StaticViewsProps) {
 
               <button
                 type="submit"
-                className="w-full py-2.5 bg-neutral-950 text-white font-semibold rounded-xl text-xs hover:bg-neutral-800 transition-colors flex items-center justify-center gap-1.5 cursor-pointer"
+                className="w-full py-2.5 bg-neutral-950 text-white font-semibold rounded-xl text-xs hover:bg-neutral-800 transition-colors flex items-center justify-center gap-1.5 cursor-pointer min-h-[40px]"
               >
                 <Send className="w-3.5 h-3.5" />
-                Transmit Message
+                Send Message
               </button>
             </form>
           )}

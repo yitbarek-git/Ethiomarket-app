@@ -828,14 +828,14 @@ export const SEED_PRODUCTS: Product[] = [
     createdAt: new Date(Date.now() - 3600000 * 24 * 15).toISOString()
   },
 
-  // --- ETHIOPIAN AGRO, COFFEE & SPICES (BOOKS / AGRO CATEGORY) ---
+  // --- ETHIOPIAN AGRO, COFFEE & SPICES ---
   {
     id: "p8",
     title: "Organic Sidama Specialty Grade-1 Washed Coffee Beans (1kg)",
     description: "Award-winning Arabica coffee beans directly from Sidama smallholder farmer cooperatives. Medium roast profile with vibrant jasmine aroma, peach sweetness, and silky body. Freshly roasted upon order.",
     price: 850,
     condition: "NEW",
-    category: "Books",
+    category: "Agro & Coffee",
     images: [
       "https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=600&auto=format&fit=crop&q=80",
       "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=600&auto=format&fit=crop&q=80"
@@ -855,7 +855,7 @@ export const SEED_PRODUCTS: Product[] = [
     description: "Sun-dried natural coffee from the birthplace of Arabica in Yirgacheffe. Complex notes of ripe blueberry, bergamot citrus, and honey sweetness. World renowned Ethiopian heritage.",
     price: 950,
     condition: "NEW",
-    category: "Books",
+    category: "Agro & Coffee",
     images: [
       "https://images.unsplash.com/photo-1559056199-641a0ac8b55e?w=600&auto=format&fit=crop&q=80"
     ],
@@ -874,7 +874,7 @@ export const SEED_PRODUCTS: Product[] = [
     description: "Direct harvest premium Magna Teff from fertile Gojjam soil. Cleaned, destoned, and packaged in a reinforced 50kg grain sack. Makes fluffy, sour, authentic Ethiopian Injera.",
     price: 6200,
     condition: "NEW",
-    category: "Books",
+    category: "Agro & Coffee",
     images: [
       "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=600&auto=format&fit=crop&q=80"
     ],
@@ -893,7 +893,7 @@ export const SEED_PRODUCTS: Product[] = [
     description: "Handmade fired terracotta Ethiopian Jebena for traditional coffee ceremonies. Bundled with 6 gold-rimmed ceramic Sini cups and a carved wooden Rekebot serving table. Preserving Ethiopian cultural warmth.",
     price: 1850,
     condition: "NEW",
-    category: "Books",
+    category: "Agro & Coffee",
     images: [
       "https://images.unsplash.com/photo-1517256064527-09c73fc73e38?w=600&auto=format&fit=crop&q=80"
     ],
@@ -923,7 +923,26 @@ export const SEED_PRODUCTS: Product[] = [
     isFeatured: false,
     vendorId: "user-vendor-2",
     vendorName: "Habesha Hand-Weavers",
-    createdAt: new Date(Date.now() - 3600000 * 70).toISOString()
+    createdAt: new Date(Date.now() - 3600000 * 12).toISOString()
+  },
+  {
+    id: "p40",
+    title: "Oromia & Ethiopian History: Cultural Heritage & Folklore Anthology",
+    description: "Illustrated hardcover collection chronicling ancient trade routes, Gadaa democratic systems, and traditional Ethiopian literature in English and Afaan Oromoo.",
+    price: 950,
+    condition: "NEW",
+    category: "Books",
+    images: [
+      "https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=600&auto=format&fit=crop&q=80"
+    ],
+    stock: 20,
+    location: "Arat Kilo, Addis Ababa",
+    rating: 4.9,
+    isApproved: true,
+    isFeatured: false,
+    vendorId: "user-vendor-2",
+    vendorName: "Habesha Hand-Weavers",
+    createdAt: new Date(Date.now() - 3600000 * 8).toISOString()
   },
 
   // --- SERVICES ---

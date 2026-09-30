@@ -247,6 +247,9 @@ export default function AIAssistant() {
                             <img
                               src={p.images[0] || "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=100"}
                               alt={p.title}
+                              onError={(e) => {
+                                (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&auto=format&fit=crop&q=80";
+                              }}
                               className="w-12 h-12 object-cover rounded-lg shrink-0 border border-neutral-200"
                             />
                             

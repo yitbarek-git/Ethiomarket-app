@@ -399,8 +399,12 @@ export function searchAndRankProducts(
   list = list.filter((p) => p.isApproved);
 
   // Apply explicit filters if provided
-  if (options?.category && options.category !== "All" && options.category !== "") {
-    list = list.filter((p) => p.category.toLowerCase() === options.category!.toLowerCase());
+  if (options?.category && options.category !== "All" && options.category.trim() !== "") {
+    const filterCat = options.category.toLowerCase().trim();
+    list = list.filter((p) => {
+      const pCat = (p.category || "").toLowerCase().trim();
+      return pCat === filterCat || pCat.includes(filterCat) || filterCat.includes(pCat);
+    });
   }
   if (options?.condition && options.condition !== "") {
     list = list.filter((p) => p.condition === options.condition);

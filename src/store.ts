@@ -20,6 +20,7 @@ interface MarketStore {
   currentPage: string;
   activeProductId: string | null; // For ProductDetails view
   activeCategory: string;
+  setActiveCategory: (category: string) => void;
   setCurrentPage: (page: string, productId?: string | null, category?: string) => void;
 
   // Products Cache / Filters
@@ -96,6 +97,7 @@ export const useMarketStore = create<MarketStore>((set, get) => ({
   currentPage: "home",
   activeProductId: null,
   activeCategory: "All",
+  setActiveCategory: (category) => set({ activeCategory: category || "All" }),
   setCurrentPage: (page, productId = null, category = "All") => {
     window.scrollTo({ top: 0, behavior: "smooth" });
     set({ currentPage: page, activeProductId: productId, activeCategory: category });
@@ -112,10 +114,17 @@ export const useMarketStore = create<MarketStore>((set, get) => ({
     sortBy: "newest",
     location: ""
   },
-  setFilter: (key, value) => set((state) => ({
-    filters: { ...state.filters, [key]: value }
-  })),
+  setFilter: (key, value) => {
+    if (key === "category") {
+      set({ activeCategory: value || "All" });
+    } else {
+      set((state) => ({
+        filters: { ...state.filters, [key]: value }
+      }));
+    }
+  },
   resetFilters: () => set({
+    activeCategory: "All",
     filters: {
       search: "",
       condition: "",

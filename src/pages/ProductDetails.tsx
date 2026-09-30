@@ -315,6 +315,9 @@ export default function ProductDetails({ productId }: ProductDetailsProps) {
             <img 
               src={product.images[0]} 
               alt={product.title} 
+              onError={(e) => {
+                (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&auto=format&fit=crop&q=80";
+              }}
               className="w-full h-full object-cover"
               referrerPolicy="no-referrer"
             />
@@ -546,7 +549,7 @@ export default function ProductDetails({ productId }: ProductDetailsProps) {
           {/* Feedback listing */}
           <div className="space-y-3 sm:space-y-4 max-h-[400px] overflow-y-auto pr-1">
             {reviews.length === 0 ? (
-              <p className="text-xs text-neutral-400 text-center py-6">No ratings or evaluations have been posted yet for this listing.</p>
+              <p className="text-xs text-neutral-400 text-center py-6">No customer reviews yet. Be the first to share your experience with this vendor!</p>
             ) : (
               reviews.map((rev) => (
                 <div key={rev.id} className="p-3.5 sm:p-4 bg-white border border-neutral-150 rounded-xl space-y-2 shadow-xs">

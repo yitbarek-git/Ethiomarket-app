@@ -154,11 +154,11 @@ export default function LoginRegister() {
 
             {/* Phone */}
             <div className="space-y-1">
-              <label className="text-[10px] font-bold text-neutral-450 uppercase tracking-wider font-mono">Mobile Mobile Phone (verification)</label>
+              <label className="text-[10px] font-bold text-neutral-450 uppercase tracking-wider font-mono">Phone Number</label>
               <div className="relative">
                 <input
                   type="tel"
-                  placeholder="+251 900 000000"
+                  placeholder="+251 911 000000"
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
                   required
@@ -170,7 +170,7 @@ export default function LoginRegister() {
 
             {/* Geographical Location */}
             <div className="space-y-1">
-              <label className="text-[10px] font-bold text-neutral-450 uppercase tracking-wider font-mono">Location city</label>
+              <label className="text-[10px] font-bold text-neutral-450 uppercase tracking-wider font-mono">City / Sub-City</label>
               <div className="relative">
                 <input
                   type="text"
@@ -187,11 +187,11 @@ export default function LoginRegister() {
 
         {/* Email */}
         <div className="space-y-1">
-          <label className="text-[10px] font-bold text-neutral-450 uppercase tracking-wider font-mono block">E-Mail Address</label>
+          <label className="text-[10px] font-bold text-neutral-450 uppercase tracking-wider font-mono block">Email Address</label>
           <div className="relative">
             <input
               type="email"
-              placeholder="buyer@ethio.com (or vendor@ethio.com)"
+              placeholder="e.g. almaz@ethio.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -203,11 +203,11 @@ export default function LoginRegister() {
 
         {/* Password */}
         <div className="space-y-1">
-          <label className="text-[10px] font-bold text-neutral-450 uppercase tracking-wider font-mono block">Password Key</label>
+          <label className="text-[10px] font-bold text-neutral-450 uppercase tracking-wider font-mono block">Password</label>
           <div className="relative">
             <input
               type="password"
-              placeholder="e.g. password"
+              placeholder="••••••••••••"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
@@ -221,10 +221,10 @@ export default function LoginRegister() {
         <button
           type="submit"
           disabled={loading}
-          className="w-full py-3 bg-neutral-950 hover:bg-neutral-800 text-white font-semibold rounded-xl text-xs cursor-pointer shadow-md disabled:opacity-50 transition-colors"
+          className="w-full py-3 bg-neutral-950 hover:bg-neutral-800 text-white font-semibold rounded-xl text-xs cursor-pointer shadow-md disabled:opacity-50 transition-colors min-h-[42px]"
         >
           {loading 
-            ? "Authorizing..." 
+            ? "Signing in..." 
             : activeMode === "login" 
               ? t("login") 
               : t("register")
@@ -232,12 +232,10 @@ export default function LoginRegister() {
         </button>
       </form>
 
-      {/* Developer Sandbox Hints */}
-      <div className="p-3 bg-amber-50 rounded-xl border border-amber-100 text-[10px] leading-relaxed text-neutral-700 font-serif">
-        <strong>Demo Sandbox Profiles (Seed data):</strong> <br />
-        • Buyer Row: <code className="font-mono bg-white px-1">buyer@ethio.com</code> + code <code className="font-mono bg-white px-1">password</code> <br />
-        • Vendor Row: <code className="font-mono bg-white px-1">vendor@ethio.com</code> + code <code className="font-mono bg-white px-1">password</code> <br />
-        • Admin Row: <code className="font-mono bg-white px-1">admin@ethio.com</code> + code <code className="font-mono bg-white px-1">password</code>
+      {/* Trust & Security Badge */}
+      <div className="p-3 bg-neutral-50 rounded-xl border border-neutral-150 text-[11px] leading-relaxed text-neutral-500 flex items-center gap-2">
+        <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
+        <span>Secured authentication with encrypted session tokens and verified seller protections.</span>
       </div>
     </div>
   );

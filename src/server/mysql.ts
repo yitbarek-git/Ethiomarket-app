@@ -94,7 +94,10 @@ class MySQLDatabaseManager {
         waitForConnections: true,
         connectionLimit: 10,
         queueLimit: 0,
-        connectTimeout: 3000,
+        connectTimeout: 10000, // Increased for cloud latency
+        ssl: {
+          rejectUnauthorized: false // 👈 REQUIRED for Aiven MySQL
+        },
       });
 
       // Probe connection with a simple query

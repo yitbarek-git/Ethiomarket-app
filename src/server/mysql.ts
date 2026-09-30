@@ -1,3 +1,4 @@
+import "dotenv/config";
 import mysql, { Pool, RowDataPacket } from "mysql2/promise";
 import { User, Product, Order, Message, Review, DbSchema } from "./db";
 import { SEED_USERS, SEED_PRODUCTS, SEED_REVIEWS, SEED_MESSAGES, SEED_ORDERS } from "./seedData";
